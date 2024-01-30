@@ -1,0 +1,12 @@
+const String carroThemeIsDark = "carro_theme_is_dark";
+const String sessionData = "carro_session_data";
+const String sessionUsername = "carro_username";
+const String sessionEmail = "carro_email";
+const String sessionToken = "carro_token";
+const String APPLICATION_JSON = "application/json";
+const String CONTENT_TYPE = "content-type";
+const String ACCEPT = "accept";
+const String AUTHORIZATION = "authorization";
+const String DEFAULT_LANGUAGE = "en";
+const String TOKEN = "token";
+const String BASE_URL = "http://localhost:3333";
