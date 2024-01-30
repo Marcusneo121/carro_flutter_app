@@ -21,41 +21,6 @@ class CarroSplashscreen extends StatefulWidget {
 }
 
 class _CarroSplashscreenState extends State<CarroSplashscreen> {
-  // Map<String, dynamic> sessionDataTesting = {
-  //   "data": {
-  //     "user": {
-  //       "id": 1,
-  //       "role_id": 0,
-  //       "username": "Tembikai121",
-  //       "email": "marcus121neo@gmail.com",
-  //       "remember_me_token": null,
-  //       "created_at": "2024-01-24T15:50:25.971+08:00",
-  //       "updated_at": "2024-01-24T15:50:25.971+08:00"
-  //     },
-  //     "profile": {
-  //       "id": 1,
-  //       "user_id": 1,
-  //       "first_name": "Marcus",
-  //       "last_name": "Yin Neo",
-  //       "address1": "Taman 1",
-  //       "address2": "Taman 2",
-  //       "address3": "Taman 3",
-  //       "age": "23",
-  //       "phone_number": "018-9134373",
-  //       "date_of_birth": "2000-12-01T11:18:53.411Z",
-  //       "profile_image": null,
-  //       "created_at": "2024-01-24T15:50:25.977+08:00",
-  //       "updated_at": "2024-01-24T15:50:25.977+08:00"
-  //     }
-  //   },
-  //   "token": {
-  //     "type": "bearer",
-  //     "token":
-  //         "Mw.Y1mfaGfC8oNXKHSXdlS8fsaKDergddyJ9frtGZRMxcUU8La_YnuyOzRuuB13",
-  //     "expires_at": "2024-02-05T22:51:22.217+08:00"
-  //   },
-  //   "message": "Login Succesfully"
-  // };
 
   // checkSession() async {
   //   SharedPrefs().setSessionData = UserSession.fromJson(sessionData);

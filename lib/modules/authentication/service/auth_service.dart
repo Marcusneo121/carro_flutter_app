@@ -33,10 +33,6 @@ class AuthService {
     try {
       Response<dynamic> response = await dio.post(
         url: '/logout',
-        // options: Options(headers: {
-        //   "authorization":
-        //       'Bearer MTk.VaQeUSLv89rC4noAYBItzV4DELqktidXhGuQsjlwIDaVAonL6oxjSfXIqmAM'
-        // }),
       );
       return LogoutResponse.fromJson(response.data);
     } on DioException catch (e) {
