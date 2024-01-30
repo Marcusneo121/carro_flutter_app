@@ -1,16 +1,55 @@
-# carro_flutter_app
 
-A new Flutter project.
+![Logo](https://i.ibb.co/wN4LCJb/carros.png)
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+# Carro Flutter App
 
-A few resources to get you started if this is your first Flutter project:
+Carro is a P2P Car Sharing Platform. If you go through my repos, you had probably seen similar Flutter app from few years ago. YES! Its a similar app.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+The reason I am re-writing the same app is because I am trying to create my own Backend APIs to replace the old Carro app which used Firebase + Brush up my flutter with project from scratch.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Therefore, this project is mainly a showcase of how the APIs work. The main focus is the Backend.
+
+
+- Backend Framework: Adonis JS
+- Database : PostgreSQL
+- ORM : LucidORM
+
+
+## Roadmap
+
+- Deployment / CICD of the Flutter app
+- Deployment of the Backend
+- Database hosting for Backend
+- Build a web app with Next.js (hopefully)
+- ^^^ will add as the project grow^^^
+
+
+## Features
+
+Some pretty basic feature, mainly focus on backend. This is just a showcase.
+
+- Light/dark mode
+- Add cars to favourite
+- Bargain car renting price
+- Search cars
+- ^^^more to come^^^
+
+
+## Build & Run
+To build & run this Flutter project : 
+
+```bash
+  flutter pub get
+  flutter run
+```
+
+## Related
+
+[Carro Backend Repository - Adonis JS](https://github.com/Marcusneo121/carro-backend)
+
+
+## Author
+
+- [@Marcusneo121](https://github.com/Marcusneo121)
+
