@@ -1,4 +1,5 @@
 import 'package:carro_flutter_app/core/provider/view_state.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class ViewStateModel with ChangeNotifier {
@@ -8,11 +9,16 @@ class ViewStateModel with ChangeNotifier {
 
   ViewState get viewState => _viewState;
 
+  ViewStateError? _viewStateError;
+
+  ViewStateError? get viewStateError => _viewStateError;
+
   ViewStateModel({ViewState? viewState})
       : _viewState = viewState ?? ViewState.idle {}
 
   set viewState(ViewState viewState) {
     _viewState = viewState;
+    print(viewState);
     notifyListeners();
   }
 
@@ -30,7 +36,16 @@ class ViewStateModel with ChangeNotifier {
 
   bool get isError => viewState == ViewState.error;
 
-  void setError() => viewState = ViewState.empty;
+  void setError(e, stackTrace, {String? message}) {
+    ErrorType errorType = ErrorType.defaultError;
+
+    viewState = ViewState.error;
+    _viewStateError = ViewStateError(
+      errorType,
+      message: message,
+      errorMessage: e.toString(),
+    );
+  }
 
   @override
   void notifyListeners() {
