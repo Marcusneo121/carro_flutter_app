@@ -2,6 +2,7 @@ import 'package:carro_flutter_app/core/route/route_manager.dart';
 import 'package:carro_flutter_app/core/theme/colors.dart';
 import 'package:carro_flutter_app/core/theme/dimens.dart';
 import 'package:carro_flutter_app/core/theme/styles.dart';
+import 'package:carro_flutter_app/core/widget/rounded_button.dart';
 import 'package:carro_flutter_app/main.dart';
 import 'package:carro_flutter_app/modules/authentication/register/ui/widgets/register_top_bar_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -575,6 +576,20 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                               ),
                             ],
+                          ),
+                          const SizedBox(
+                            height: Dimensions.dp_10,
+                          ),
+                          const SizedBox(
+                            height: Dimensions.dp_30,
+                          ),
+                          RoundedButton(
+                            buttonText: 'Create account',
+                            onTap: () {
+                              // AuthController(context: context).login(
+                              //     usernameController.text,
+                              //     passwordController.text);
+                            },
                           ),
                           const SizedBox(
                             height: Dimensions.dp_10,

@@ -137,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                     locator<CarroRouter>().navigateTo(CommonRoute.registerPage);
                   },
                   child: const Text(
-                    'Register here',
+                    'Create account',
                     style: CarroTextStyles.small_label_bold,
                   ),
                 ),
