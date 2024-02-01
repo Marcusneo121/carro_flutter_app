@@ -3,6 +3,7 @@ import 'package:carro_flutter_app/core/models/lougout_response.dart';
 import 'package:carro_flutter_app/core/models/user_session.dart';
 import 'package:carro_flutter_app/core/network/api.dart';
 import 'package:carro_flutter_app/core/utils/shared_prefs.dart';
+import 'package:carro_flutter_app/modules/authentication/register/entity/register.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'dart:convert' as convert;
@@ -11,6 +12,35 @@ import 'package:http/http.dart' as http;
 final dio = DioFactory();
 
 class AuthService {
+  static Future<UserSession?> register(RegisterData data) async {
+    try {
+      Response<dynamic> response = await dio.post(
+        url: '/login',
+        queryParameters: {
+          //can actually use toJSON in the RegisterData model, if available
+          "isAdmin": false,
+          "username": data.username,
+          "email": data.email,
+          "password": data.password,
+          "first_name": data.firstName,
+          "last_name": data.lastName,
+          "address1": data.address1,
+          "address2": data.address2,
+          "address3": data.address3,
+          "age": 23,
+          "phone_number": data.phoneNumber,
+          "date_of_birth": data.dateOfBirth,
+          "profile_image": data.profileImage
+        },
+      );
+      return UserSession.fromJson(response.data);
+    } on DioException catch (e) {
+      DioErrorHelper().showDialog(e);
+    } catch (e) {
+      EasyLoading.showError('Error, please try again');
+    }
+  }
+
   static Future<UserSession?> login(String username, String password) async {
     try {
       Response<dynamic> response = await dio.post(
@@ -26,7 +56,6 @@ class AuthService {
     } catch (e) {
       EasyLoading.showError('Error, please try again');
     }
-    return null;
   }
 
   static Future<LogoutResponse?> logout() async {
@@ -36,12 +65,10 @@ class AuthService {
       );
       return LogoutResponse.fromJson(response.data);
     } on DioException catch (e) {
-      print(e);
       DioErrorHelper().showDialog(e);
       // EasyLoading.showError('Error logging out, please try again');
     } catch (e) {
       EasyLoading.showError('Error logging out, please try again');
     }
-    return null;
   }
 }

@@ -24,12 +24,11 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: Dimensions.dp_40),
-      color: CarroColors.getColor(context, CarroColors.scaffoldBackgroundColor),
-      child: SafeArea(
-        child: Scaffold(
-          body: Center(
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: Dimensions.dp_40),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -109,9 +108,34 @@ class _LoginPageState extends State<LoginPage> {
                 RoundedButton(
                   buttonText: 'Login',
                   onTap: () {
-                    AuthController(context: context).login(usernameController.text, passwordController.text);
+                    AuthController(context: context).login(
+                        usernameController.text, passwordController.text);
                   },
                 ),
+                // const Text(
+                //   "Don't have an account?",
+                //   style: TextStyle(
+                //     color: Colors.white,
+                //     fontWeight: FontWeight.w600,
+                //     fontFamily: 'Poppins',
+                //     fontSize: 16.0,
+                //   ),
+                // ),
+                // TextButton(
+                //   onPressed: () {
+                //     //Get.toNamed('/login/registration');
+                //     //Navigator.pushNamed(context, Registration.id);
+                //   },
+                //   child: const Text(
+                //     'Register here',
+                //     style: TextStyle(
+                //       color: Color(0xFF7879F1),
+                //       fontWeight: FontWeight.w600,
+                //       fontFamily: 'Poppins',
+                //       fontSize: 17.0,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),

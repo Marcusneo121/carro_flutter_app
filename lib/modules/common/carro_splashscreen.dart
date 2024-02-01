@@ -21,7 +21,6 @@ class CarroSplashscreen extends StatefulWidget {
 }
 
 class _CarroSplashscreenState extends State<CarroSplashscreen> {
-
   // checkSession() async {
   //   SharedPrefs().setSessionData = UserSession.fromJson(sessionData);
   //   // final SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -66,7 +65,8 @@ class _CarroSplashscreenState extends State<CarroSplashscreen> {
     super.initState();
     //addPref();
     Future.delayed(const Duration(seconds: 3), () {
-      checkSession();
+      // checkSession();
+      AuthController(context: context).checkUserSession();
     });
   }
 

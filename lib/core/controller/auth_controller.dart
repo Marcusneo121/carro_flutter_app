@@ -1,3 +1,4 @@
+import 'package:carro_flutter_app/core/constants/strings.dart';
 import 'package:carro_flutter_app/core/models/lougout_response.dart';
 import 'package:carro_flutter_app/core/models/user_session.dart';
 import 'package:carro_flutter_app/core/provider/view_model/theme_provider.dart';
@@ -19,8 +20,6 @@ class AuthController {
     //call api here initialize
   }
 
-  
-
   login(String username, String password) async {
     EasyLoading.show(dismissOnTap: false);
     UserSession? userLoginData = await AuthService.login(username, password);
@@ -29,7 +28,7 @@ class AuthController {
       print(userLoginData.token?.token);
       locator<CarroRouter>().navigateToAndRemoveUntil(CommonRoute.homePage);
       EasyLoading.dismiss();
-    }
+    } else {}
 
     // else {
     //   EasyLoading.showError(
@@ -50,7 +49,7 @@ class AuthController {
   logout() async {
     EasyLoading.show(dismissOnTap: false);
     LogoutResponse? userLogoutData = await AuthService.logout();
-    print(SharedPrefs().userSessionData.token?.token.toString());
+    print(sharef.userSessionData.token?.token.toString());
     if (userLogoutData != null) {
       sharef.removeSessionData();
       context.read<ThemeProvider>().setSelectedIndex(0);
@@ -59,5 +58,25 @@ class AuthController {
     }
   }
 
-  checkUserSession() {}
+  checkUserSession() {
+    if (sharef.getStringUserSessionData != null) {
+      if (sharef.userSessionData.token?.expiresAt != null) {
+        DateTime dt1 = DateTime.now();
+        DateTime dt2 =
+            DateTime.parse(sharef.userSessionData.token?.expiresAt ?? "");
+
+        if (dt1.compareTo(dt2) > 0) {
+          //DT1 is after DT2
+          EasyLoading.showError('Session Expired. Please login again.');
+          sharef.removeSessionData();
+          locator<CarroRouter>()
+              .navigateToAndRemoveUntil(CommonRoute.loginPage);
+        } else {
+          locator<CarroRouter>().navigateToAndRemoveUntil(CommonRoute.homePage);
+        }
+      }
+    } else {
+      locator<CarroRouter>().navigateToAndRemoveUntil(CommonRoute.loginPage);
+    }
+  }
 }
