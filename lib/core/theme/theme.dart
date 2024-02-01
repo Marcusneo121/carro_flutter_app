@@ -40,7 +40,7 @@ class AppTheme {
       onError: Colors.white,
       background: const Color(0xFFF1F1F1),
       onBackground: Colors.black,
-      surface: Colors.pink,
+      surface: const Color(0xFFF1F1F1),
       onSurface: Colors.black38,
     ),
     inputDecorationTheme: const InputDecorationTheme(
@@ -92,7 +92,7 @@ class AppTheme {
       onError: Colors.white,
       background: Color(0xFF0C0120),
       onBackground: Color(0xFFBDBDBD),
-      surface: Colors.pink,
+      surface: Color(0xFF0C0120),
       onSurface: Color(0xFF0C0120),
     ),
     inputDecorationTheme: const InputDecorationTheme(

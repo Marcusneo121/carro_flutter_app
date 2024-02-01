@@ -1,5 +1,6 @@
 import 'package:carro_flutter_app/core/route/route_index.dart';
 import 'package:carro_flutter_app/modules/authentication/login/ui/login_page.dart';
+import 'package:carro_flutter_app/modules/authentication/register/ui/register_page.dart';
 import 'package:carro_flutter_app/modules/common/main_skeleton.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ class CarroRouter {
 
   final GlobalKey<NavigatorState> navigatoryKey = GlobalKey<NavigatorState>();
 
-  void pop(String routeName) {
+  void pop() {
     return navigatoryKey.currentState!.pop();
   }
 
@@ -37,6 +38,10 @@ class CarroRouter {
     switch (settings.name) {
       case CommonRoute.homePage:
         return MaterialPageRoute(builder: (_) => const MainSkeleton());
+      case CommonRoute.loginPage:
+        return MaterialPageRoute(builder: (_) => const LoginPage());
+      case CommonRoute.registerPage:
+        return MaterialPageRoute(builder: (_) => const RegisterPage());
       // case CommonRoute.textPage:
       //   return MaterialPageRoute(
       //       builder: (_) => MainSkeleton(selectedTabIndex: 1));
@@ -49,8 +54,6 @@ class CarroRouter {
       //       builder: (_) => Screen2(
       //             title: args,
       //           ));
-      case CommonRoute.loginPage:
-        return MaterialPageRoute(builder: (_) => const LoginPage());
       default:
         return MaterialPageRoute(builder: (_) => const LoginPage());
     }

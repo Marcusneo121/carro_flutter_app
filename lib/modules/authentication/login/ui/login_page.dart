@@ -112,30 +112,35 @@ class _LoginPageState extends State<LoginPage> {
                         usernameController.text, passwordController.text);
                   },
                 ),
-                // const Text(
-                //   "Don't have an account?",
-                //   style: TextStyle(
-                //     color: Colors.white,
-                //     fontWeight: FontWeight.w600,
-                //     fontFamily: 'Poppins',
-                //     fontSize: 16.0,
-                //   ),
-                // ),
-                // TextButton(
-                //   onPressed: () {
-                //     //Get.toNamed('/login/registration');
-                //     //Navigator.pushNamed(context, Registration.id);
-                //   },
-                //   child: const Text(
-                //     'Register here',
-                //     style: TextStyle(
-                //       color: Color(0xFF7879F1),
-                //       fontWeight: FontWeight.w600,
-                //       fontFamily: 'Poppins',
-                //       fontSize: 17.0,
-                //     ),
-                //   ),
-                // ),
+                Divider(
+                  height: Dimensions.dp_100,
+                  thickness: 1,
+                  indent: Dimensions.dp_40,
+                  endIndent: Dimensions.dp_40,
+                  color:
+                      CarroColors.getColor(context, CarroColors.textInputColor),
+                ),
+                const Text(
+                  "Don't have an account?",
+                  // style: TextStyle(
+                  //   color: Colors.white,
+                  //   fontWeight: FontWeight.w600,
+                  //   fontFamily: 'Poppins',
+                  //   fontSize: 16.0,
+                  // ),
+                  style: CarroTextStyles.large_normal_text_bold,
+                ),
+                TextButton(
+                  onPressed: () {
+                    //Get.toNamed('/login/registration');
+                    //Navigator.pushNamed(context, Registration.id);
+                    locator<CarroRouter>().navigateTo(CommonRoute.registerPage);
+                  },
+                  child: const Text(
+                    'Register here',
+                    style: CarroTextStyles.small_label_bold,
+                  ),
+                ),
               ],
             ),
           ),

@@ -4,4 +4,5 @@ class CommonRoute {
   static const String textPage = 'textPage';
   static const String settingsPage = 'settingsPage';
   static const String loginPage = 'loginPage';
+  static const String registerPage = 'registerPage';
 }
