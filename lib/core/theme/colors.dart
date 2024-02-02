@@ -52,7 +52,7 @@ class CarroColors {
 
   static final textInputColorDark = Colors.grey.shade400;
 
-  static final registerHeadlineColor = Colors.grey.withOpacity(1.0);
+  static final registerHeadlineColor = Colors.black.withOpacity(1.0);
 
   static const registerHeadlineColorDark = Colors.white;
 

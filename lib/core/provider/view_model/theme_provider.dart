@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 
 class ThemeProvider extends ChangeNotifier {
   int _selectedIndex = 0;
-  ThemeMode _theme = SharedPrefs().isDarkThemePref == false ||
-          SharedPrefs().isDarkThemePref == null
-      ? ThemeMode.light
-      : ThemeMode.dark;
+  ThemeMode _theme = SharedPrefs().isDarkThemePref == null
+      ? ThemeMode.dark
+      : SharedPrefs().isDarkThemePref == false
+          ? ThemeMode.light
+          : ThemeMode.dark;
   ThemeMode get getTheme => _theme;
 
   int get getSelectedIndex => _selectedIndex;

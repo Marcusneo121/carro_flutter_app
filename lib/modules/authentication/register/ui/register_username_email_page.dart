@@ -5,6 +5,7 @@ import 'package:carro_flutter_app/core/theme/dimens.dart';
 import 'package:carro_flutter_app/core/theme/styles.dart';
 import 'package:carro_flutter_app/core/widget/rounded_button.dart';
 import 'package:carro_flutter_app/main.dart';
+import 'package:carro_flutter_app/modules/authentication/register/ui/widgets/register_progress_bar_widget.dart';
 import 'package:carro_flutter_app/modules/authentication/register/ui/widgets/register_top_bar_widget.dart';
 import 'package:carro_flutter_app/modules/authentication/register/view_model/register_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,184 +26,204 @@ class _RegisterUsernameEmailPageState extends State<RegisterUsernameEmailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.symmetric(
-            vertical: Dimensions.dp_36, horizontal: Dimensions.dp_30),
-        child: RoundedButton(
-          buttonText: 'Next',
-          onTap: () {
-            // AuthController(context: context).login(
-            //     usernameController.text,
-            //     passwordController.text);
-            locator<CarroRouter>().navigateTo(CommonRoute.registerAddressPage);
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        bottomNavigationBar: Consumer<RegisterProvider>(
+          builder: (context, registerModel, child) {
+            return Container(
+              // padding: const EdgeInsets.symmetric(
+              //     vertical: Dimensions.dp_15, horizontal: Dimensions.dp_30),
+              margin: const EdgeInsets.only(
+                left: Dimensions.dp_30,
+                right: Dimensions.dp_30,
+                bottom: Dimensions.dp_40,
+              ),
+              child: RoundedButton(
+                buttonText: 'Next',
+                onTap: () {
+                  // AuthController(context: context).login(
+                  //     usernameController.text,
+                  //     passwordController.text);
+                  registerModel.registerProgressUpdater(
+                      CommonRoute.registerUsernameEmailPage);
+                  locator<CarroRouter>()
+                      .navigateTo(CommonRoute.registerAddressPage);
+                },
+              ),
+            );
           },
         ),
-      ),
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            Consumer(
-              builder: (context, homeModel, child) {
-                return SliverAppBar(
-                  pinned: true,
-                  scrolledUnderElevation: 0.0,
-                  leadingWidth: Dimensions.dp_290,
-                  leading: RegisterTopBarWidget(
-                    titleAppBar: '',
-                    icon: Icons.close_rounded,
-                    onTap: () {
-                      showCupertinoDialog(
-                          context: context,
-                          builder: (_) => CupertinoAlertDialog(
-                                title: const Text("Are you sure?"),
-                                content: Container(
-                                  margin: const EdgeInsets.only(
-                                      top: Dimensions.dp_20),
-                                  child: const Text(
-                                      "Information filled will not be save if quit."),
-                                ),
-                                actions: [
-                                  // Close the dialog
-                                  // You can use the CupertinoDialogAction widget instead
-                                  CupertinoButton(
-                                      child: const Text('Cancel'),
+        body: SafeArea(
+          child: CustomScrollView(
+            slivers: [
+              Consumer<RegisterProvider>(
+                builder: (context, registerModel, child) {
+                  return SliverAppBar(
+                    pinned: true,
+                    scrolledUnderElevation: 0.0,
+                    leadingWidth: Dimensions.dp_290,
+                    leading: RegisterTopBarWidget(
+                      titleAppBar: '',
+                      icon: Icons.close_rounded,
+                      onTap: () {
+                        showCupertinoDialog(
+                            context: context,
+                            builder: (_) => CupertinoAlertDialog(
+                                  title: const Text("Are you sure?"),
+                                  content: Container(
+                                    margin: const EdgeInsets.only(
+                                        top: Dimensions.dp_20),
+                                    child: const Text(
+                                        "Information filled will not be save if quit."),
+                                  ),
+                                  actions: [
+                                    // Close the dialog
+                                    // You can use the CupertinoDialogAction widget instead
+                                    CupertinoButton(
+                                        child: const Text('Cancel'),
+                                        onPressed: () {
+                                          locator<CarroRouter>().pop();
+                                        }),
+                                    CupertinoButton(
+                                      child: const Text('Quit'),
                                       onPressed: () {
+                                        registerModel
+                                            .registerProgressUpdater('clear');
                                         locator<CarroRouter>().pop();
-                                      }),
-                                  CupertinoButton(
-                                    child: const Text('Quit'),
-                                    onPressed: () {
-                                      locator<CarroRouter>().pop();
-                                      locator<CarroRouter>().pop();
-                                    },
-                                  )
-                                ],
-                              ));
-                    },
-                  ),
-                );
-              },
-            ),
-            Consumer<RegisterProvider>(
-              builder: (context, homeModel, child) {
-                if (homeModel.isBusy) {
-                  return const SliverFillRemaining(
-                    hasScrollBody: false,
-                    child: Center(
-                      child: CircularProgressIndicator(),
+                                        locator<CarroRouter>().pop();
+                                      },
+                                    )
+                                  ],
+                                ));
+                      },
                     ),
                   );
-                } else if (homeModel.isError) {
-                  return const SliverFillRemaining(
-                    hasScrollBody: false,
-                    child: Center(
-                      child: Text("Something went wrong"),
-                    ),
-                  );
-                } else {
-                  return SliverFillRemaining(
-                    hasScrollBody: false,
-                    child: Container(
-                      padding: const EdgeInsets.only(
-                        top: Dimensions.dp_10,
-                        bottom: Dimensions.dp_10,
-                        left: Dimensions.dp_36,
-                        right: Dimensions.dp_36,
+                },
+              ),
+              Consumer<RegisterProvider>(
+                builder: (context, registerModel, child) {
+                  if (registerModel.isBusy) {
+                    return const SliverFillRemaining(
+                      hasScrollBody: false,
+                      child: Center(
+                        child: CircularProgressIndicator(),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: Dimensions.dp_10),
-                          Text(
-                            'Enter your account details',
-                            style: CarroTextStyles.medium_title_bold.copyWith(
-                              color: CarroColors.getColor(
-                                context,
-                                CarroColors.registerHeadlineColor,
+                    );
+                  } else if (registerModel.isError) {
+                    return const SliverFillRemaining(
+                      hasScrollBody: false,
+                      child: Center(
+                        child: Text("Something went wrong"),
+                      ),
+                    );
+                  } else {
+                    return SliverFillRemaining(
+                      hasScrollBody: false,
+                      child: Container(
+                        padding: const EdgeInsets.only(
+                          top: Dimensions.dp_10,
+                          bottom: Dimensions.dp_10,
+                          left: Dimensions.dp_36,
+                          right: Dimensions.dp_36,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            RegisterProgressBarWidget(
+                              homeModel: registerModel,
+                            ),
+                            const SizedBox(height: Dimensions.dp_10),
+                            Text(
+                              'Enter your account details',
+                              style: CarroTextStyles.medium_title_bold.copyWith(
+                                color: CarroColors.getColor(
+                                  context,
+                                  CarroColors.registerHeadlineColor,
+                                ),
                               ),
                             ),
-                          ),
-                          const SizedBox(height: Dimensions.dp_5),
-                          Text(
-                            'The account details that your will use everytime you login.',
-                            style: CarroTextStyles.large_item_text.copyWith(
-                              color: CarroColors.getColor(
-                                context,
-                                CarroColors.textInputColor,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: Dimensions.dp_25),
-                          Container(
-                            padding:
-                                const EdgeInsets.only(left: Dimensions.dp_5),
-                            child: Text(
-                              'Username',
-                              style: CarroTextStyles.large_normal_text_bold
-                                  .copyWith(
+                            const SizedBox(height: Dimensions.dp_5),
+                            Text(
+                              'The account details that your will use everytime you login.',
+                              style: CarroTextStyles.large_item_text.copyWith(
                                 color: CarroColors.getColor(
                                   context,
                                   CarroColors.textInputColor,
                                 ),
                               ),
                             ),
-                          ),
-                          const SizedBox(height: Dimensions.dp_5),
-                          TextFormField(
-                            style: CarroTextStyles.normal_text_bold,
-                            controller: usernameController,
-                            keyboardType: TextInputType.name,
-                            textAlign: TextAlign.left,
-                            decoration: InputDecoration(
-                              // hintText: 'Username',
-                              hintStyle:
-                                  CarroTextStyles.normal_text_bold.copyWith(
-                                color: CarroColors.getColor(
-                                    context, CarroColors.textInputColor),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: Dimensions.dp_15,
-                          ),
-                          Container(
-                            padding:
-                                const EdgeInsets.only(left: Dimensions.dp_5),
-                            child: Text(
-                              'Email',
-                              style: CarroTextStyles.large_normal_text_bold
-                                  .copyWith(
-                                color: CarroColors.getColor(
-                                  context,
-                                  CarroColors.textInputColor,
+                            const SizedBox(height: Dimensions.dp_25),
+                            Container(
+                              padding:
+                                  const EdgeInsets.only(left: Dimensions.dp_5),
+                              child: Text(
+                                'Username',
+                                style: CarroTextStyles.large_normal_text_bold
+                                    .copyWith(
+                                  color: CarroColors.getColor(
+                                    context,
+                                    CarroColors.textInputColor,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          const SizedBox(height: Dimensions.dp_5),
-                          TextFormField(
-                            style: CarroTextStyles.normal_text_bold,
-                            controller: emailController,
-                            keyboardType: TextInputType.name,
-                            textAlign: TextAlign.left,
-                            decoration: InputDecoration(
-                              // hintText: 'Username',
-                              hintStyle:
-                                  CarroTextStyles.normal_text_bold.copyWith(
-                                color: CarroColors.getColor(
-                                    context, CarroColors.textInputColor),
+                            const SizedBox(height: Dimensions.dp_5),
+                            TextFormField(
+                              style: CarroTextStyles.normal_text_bold,
+                              controller: usernameController,
+                              keyboardType: TextInputType.name,
+                              textAlign: TextAlign.left,
+                              decoration: InputDecoration(
+                                // hintText: 'Username',
+                                hintStyle:
+                                    CarroTextStyles.normal_text_bold.copyWith(
+                                  color: CarroColors.getColor(
+                                      context, CarroColors.textInputColor),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                            const SizedBox(
+                              height: Dimensions.dp_15,
+                            ),
+                            Container(
+                              padding:
+                                  const EdgeInsets.only(left: Dimensions.dp_5),
+                              child: Text(
+                                'Email',
+                                style: CarroTextStyles.large_normal_text_bold
+                                    .copyWith(
+                                  color: CarroColors.getColor(
+                                    context,
+                                    CarroColors.textInputColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: Dimensions.dp_5),
+                            TextFormField(
+                              style: CarroTextStyles.normal_text_bold,
+                              controller: emailController,
+                              keyboardType: TextInputType.name,
+                              textAlign: TextAlign.left,
+                              decoration: InputDecoration(
+                                // hintText: 'Username',
+                                hintStyle:
+                                    CarroTextStyles.normal_text_bold.copyWith(
+                                  color: CarroColors.getColor(
+                                      context, CarroColors.textInputColor),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                }
-              },
-            ),
-          ],
+                    );
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
