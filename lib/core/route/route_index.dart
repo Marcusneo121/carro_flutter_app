@@ -5,4 +5,10 @@ class CommonRoute {
   static const String settingsPage = 'settingsPage';
   static const String loginPage = 'loginPage';
   static const String registerPage = 'registerPage';
+  static const String registerUsernameEmailPage = 'registerUsernameEmailPage';
+  static const String registerAddressPage = 'registerAddressPage';
+  static const String registerPasswordPage = 'registerPasswordPage';
+  static const String registerNamePage = 'registerNamePage';
+  static const String registerBiographyPage = 'registerBiographyPage';
+  static const String registerConfirmationPage = 'registerConfirmationPage';
 }

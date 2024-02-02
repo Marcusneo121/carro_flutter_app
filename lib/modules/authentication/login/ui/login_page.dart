@@ -134,7 +134,8 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () {
                     //Get.toNamed('/login/registration');
                     //Navigator.pushNamed(context, Registration.id);
-                    locator<CarroRouter>().navigateTo(CommonRoute.registerPage);
+                    locator<CarroRouter>()
+                        .navigateTo(CommonRoute.registerUsernameEmailPage);
                   },
                   child: const Text(
                     'Create account',

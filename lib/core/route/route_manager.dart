@@ -1,6 +1,8 @@
 import 'package:carro_flutter_app/core/route/route_index.dart';
 import 'package:carro_flutter_app/modules/authentication/login/ui/login_page.dart';
+import 'package:carro_flutter_app/modules/authentication/register/ui/register_address_page.dart';
 import 'package:carro_flutter_app/modules/authentication/register/ui/register_page.dart';
+import 'package:carro_flutter_app/modules/authentication/register/ui/register_username_email_page.dart';
 import 'package:carro_flutter_app/modules/common/main_skeleton.dart';
 import 'package:flutter/material.dart';
 
@@ -42,6 +44,19 @@ class CarroRouter {
         return MaterialPageRoute(builder: (_) => const LoginPage());
       case CommonRoute.registerPage:
         return MaterialPageRoute(builder: (_) => const RegisterPage());
+      case CommonRoute.registerUsernameEmailPage:
+        return MaterialPageRoute(
+            builder: (_) => const RegisterUsernameEmailPage());
+      case CommonRoute.registerAddressPage:
+        return MaterialPageRoute(builder: (_) => const RegisterAddressPage());
+      case CommonRoute.registerPasswordPage:
+        return MaterialPageRoute(builder: (_) => const RegisterAddressPage());
+      case CommonRoute.registerNamePage:
+        return MaterialPageRoute(builder: (_) => const RegisterAddressPage());
+      case CommonRoute.registerBiographyPage:
+        return MaterialPageRoute(builder: (_) => const RegisterAddressPage());
+      case CommonRoute.registerConfirmationPage:
+        return MaterialPageRoute(builder: (_) => const RegisterAddressPage());
       // case CommonRoute.textPage:
       //   return MaterialPageRoute(
       //       builder: (_) => MainSkeleton(selectedTabIndex: 1));

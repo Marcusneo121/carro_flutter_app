@@ -3,6 +3,7 @@ import 'package:carro_flutter_app/core/theme/colors.dart';
 import 'package:carro_flutter_app/core/theme/dimens.dart';
 import 'package:carro_flutter_app/core/theme/styles.dart';
 import 'package:carro_flutter_app/core/widget/rounded_button.dart';
+import 'package:carro_flutter_app/core/widget/rounded_button_arrow.dart';
 import 'package:carro_flutter_app/main.dart';
 import 'package:carro_flutter_app/modules/authentication/register/ui/widgets/register_top_bar_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -54,7 +55,9 @@ class _RegisterPageState extends State<RegisterPage> {
               pinned: true,
               scrolledUnderElevation: 0.0,
               leadingWidth: Dimensions.dp_290,
-              leading: RegisterTopBarWidget(),
+              leading: RegisterTopBarWidget(
+                titleAppBar: 'Register an account',
+              ),
             ),
             SliverFillRemaining(
               hasScrollBody: false,
@@ -393,70 +396,70 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           Row(
                             children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    padding: const EdgeInsets.only(
-                                        left: Dimensions.dp_5),
-                                    child: Text(
-                                      'Age',
-                                      style: CarroTextStyles.normal_text_bold
-                                          .copyWith(
-                                        color: CarroColors.getColor(
-                                          context,
-                                          CarroColors.textInputColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(height: Dimensions.dp_5),
-                                  Bounceable(
-                                    onTap: () {
-                                      showCupertinoModalPopup(
-                                        barrierDismissible: false,
-                                        context: context,
-                                        builder: (context) =>
-                                            CupertinoActionSheet(
-                                          actions: [
-                                            buildAgeSelector(),
-                                          ],
-                                          cancelButton:
-                                              CupertinoActionSheetAction(
-                                            onPressed: () {
-                                              setState(() {});
-                                              locator<CarroRouter>().pop();
-                                            },
-                                            child: const Text('Done'),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    child: Container(
-                                      height: Dimensions.dp_48,
-                                      width: Dimensions.dp_70,
-                                      decoration: BoxDecoration(
-                                        color: CarroColors.getColor(context,
-                                            CarroColors.iconBackgroundColor),
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(12.0)),
-                                        border: Border.all(
-                                            width: Dimensions.dp_3,
-                                            color: CarroColors.getColor(context,
-                                                CarroColors.list_item_color)),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          selectedAge.toString(),
-                                          style:
-                                              CarroTextStyles.normal_text_bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(width: Dimensions.dp_20),
+                              // Column(
+                              //   crossAxisAlignment: CrossAxisAlignment.start,
+                              //   children: [
+                              //     Container(
+                              //       padding: const EdgeInsets.only(
+                              //           left: Dimensions.dp_5),
+                              //       child: Text(
+                              //         'Age',
+                              //         style: CarroTextStyles.normal_text_bold
+                              //             .copyWith(
+                              //           color: CarroColors.getColor(
+                              //             context,
+                              //             CarroColors.textInputColor,
+                              //           ),
+                              //         ),
+                              //       ),
+                              //     ),
+                              //     const SizedBox(height: Dimensions.dp_5),
+                              //     Bounceable(
+                              //       onTap: () {
+                              //         showCupertinoModalPopup(
+                              //           barrierDismissible: false,
+                              //           context: context,
+                              //           builder: (context) =>
+                              //               CupertinoActionSheet(
+                              //             actions: [
+                              //               buildAgeSelector(),
+                              //             ],
+                              //             cancelButton:
+                              //                 CupertinoActionSheetAction(
+                              //               onPressed: () {
+                              //                 setState(() {});
+                              //                 locator<CarroRouter>().pop();
+                              //               },
+                              //               child: const Text('Done'),
+                              //             ),
+                              //           ),
+                              //         );
+                              //       },
+                              //       child: Container(
+                              //         height: Dimensions.dp_48,
+                              //         width: Dimensions.dp_70,
+                              //         decoration: BoxDecoration(
+                              //           color: CarroColors.getColor(context,
+                              //               CarroColors.iconBackgroundColor),
+                              //           borderRadius: const BorderRadius.all(
+                              //               Radius.circular(12.0)),
+                              //           border: Border.all(
+                              //               width: Dimensions.dp_3,
+                              //               color: CarroColors.getColor(context,
+                              //                   CarroColors.list_item_color)),
+                              //         ),
+                              //         child: Center(
+                              //           child: Text(
+                              //             selectedAge.toString(),
+                              //             style:
+                              //                 CarroTextStyles.normal_text_bold,
+                              //           ),
+                              //         ),
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
+                              // const SizedBox(width: Dimensions.dp_20),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -584,7 +587,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             height: Dimensions.dp_30,
                           ),
                           RoundedButton(
-                            buttonText: 'Create account',
+                            buttonText: 'Next',
                             onTap: () {
                               // AuthController(context: context).login(
                               //     usernameController.text,

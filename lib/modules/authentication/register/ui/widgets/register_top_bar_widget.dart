@@ -7,8 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 
 class RegisterTopBarWidget extends StatelessWidget {
+  final String titleAppBar;
+  final IconData? icon;
+  final Function()? onTap;
+
   const RegisterTopBarWidget({
     super.key,
+    required this.titleAppBar,
+    this.icon,
+    this.onTap,
   });
 
   @override
@@ -20,22 +27,23 @@ class RegisterTopBarWidget extends StatelessWidget {
         children: [
           Bounceable(
             scaleFactor: 0.75,
-            onTap: () {
-              locator<CarroRouter>().pop();
-            },
+            onTap: onTap ??
+                () {
+                  locator<CarroRouter>().pop();
+                },
             child: CircleAvatar(
               backgroundColor: CarroColors.getColor(
                   context, CarroColors.iconBackgroundColor),
               radius: Dimensions.dp_24,
               child: Icon(
-                Icons.arrow_back_ios_new_rounded,
+                icon ?? Icons.arrow_back_ios_new_rounded,
                 color: CarroColors.getColor(context, CarroColors.iconColor),
               ),
             ),
           ),
           const SizedBox(width: Dimensions.dp_8),
           Text(
-            'Register an account',
+            titleAppBar,
             style: CarroTextStyles.medium_title_bold.copyWith(
               color: CarroColors.getColor(
                 context,
