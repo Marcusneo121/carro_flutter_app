@@ -175,7 +175,7 @@ class _RegisterUsernameEmailPageState extends State<RegisterUsernameEmailPage> {
                             TextFormField(
                               style: CarroTextStyles.normal_text_bold,
                               controller: usernameController,
-                              keyboardType: TextInputType.name,
+                              keyboardType: TextInputType.text,
                               textAlign: TextAlign.left,
                               decoration: InputDecoration(
                                 // hintText: 'Username',
@@ -265,7 +265,7 @@ class _RegisterUsernameEmailPageState extends State<RegisterUsernameEmailPage> {
                             TextFormField(
                               style: CarroTextStyles.normal_text_bold,
                               controller: emailController,
-                              keyboardType: TextInputType.name,
+                              keyboardType: TextInputType.text,
                               textAlign: TextAlign.left,
                               decoration: InputDecoration(
                                 // hintText: 'Username',
