@@ -132,6 +132,23 @@ class _RegisterProgressBarWidgetState extends State<RegisterProgressBarWidget> {
                     ),
                   ),
                 ),
+                Container(
+                  width: Dimensions.dp_10,
+                  color: CarroColors.getColor(
+                      context, CarroColors.scaffoldBackgroundColor),
+                ),
+                Expanded(
+                  child: Container(
+                    height: Dimensions.dp_5,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: widget.homeModel.page6Progress
+                          ? Colors.transparent
+                          : CarroColors.getColor(
+                              context, CarroColors.textInputColor),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

@@ -9,6 +9,7 @@ class CommonRoute {
   static const String registerAddressPage = 'registerAddressPage';
   static const String registerPasswordPage = 'registerPasswordPage';
   static const String registerNamePage = 'registerNamePage';
-  static const String registerBiographyPage = 'registerBiographyPage';
+  static const String registerPhoneNumberPage = 'registerPhoneNumberPage';
+  static const String registerDateOfBirthPage = 'registerDateOfBrithPage';
   static const String registerConfirmationPage = 'registerConfirmationPage';
 }

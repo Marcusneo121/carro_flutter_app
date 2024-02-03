@@ -6,6 +6,7 @@ import 'package:carro_flutter_app/core/route/route_index.dart';
 import 'package:carro_flutter_app/core/route/route_manager.dart';
 import 'package:carro_flutter_app/core/utils/shared_prefs.dart';
 import 'package:carro_flutter_app/main.dart';
+import 'package:carro_flutter_app/modules/authentication/register/entity/register.dart';
 import 'package:carro_flutter_app/modules/authentication/service/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -44,7 +45,7 @@ class AuthController {
     //     (Route<dynamic> route) => false);
   }
 
-  register() {}
+  register({required RegisterData data}) {}
 
   logout() async {
     EasyLoading.show(dismissOnTap: false);

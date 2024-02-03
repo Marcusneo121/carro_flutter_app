@@ -24,9 +24,9 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Center(
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: Dimensions.dp_40),
             child: Column(

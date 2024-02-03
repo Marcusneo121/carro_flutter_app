@@ -16,22 +16,26 @@ class AuthService {
     try {
       Response<dynamic> response = await dio.post(
         url: '/login',
-        queryParameters: {
-          //can actually use toJSON in the RegisterData model, if available
-          "isAdmin": false,
-          "username": data.username,
-          "email": data.email,
-          "password": data.password,
-          "first_name": data.firstName,
-          "last_name": data.lastName,
-          "address1": data.address1,
-          "address2": data.address2,
-          "address3": data.address3,
-          "age": 23,
-          "phone_number": data.phoneNumber,
-          "date_of_birth": data.dateOfBirth,
-          "profile_image": data.profileImage
-        },
+        queryParameters: data.toJson(),
+        // queryParameters: {
+        //   //can actually use toJSON in the RegisterData model, if available
+        //   "isAdmin": false,
+        //   "username": data.username,
+        //   "email": data.email,
+        //   "password": data.password,
+        //   "first_name": data.firstName,
+        //   "last_name": data.lastName,
+        //   "address1": data.address1,
+        //   "address2": data.address2,
+        //   "address3": data.address3,
+        //   "poscode": data.poscode,
+        //   "city": data.city,
+        //   "state": data.state,
+        //   "age": data.age == null ? null : int.parse(data.age.toString()),
+        //   "phone_number": data.phoneNumber,
+        //   "date_of_birth": data.dateOfBirth,
+        //   "profile_image": data.profileImage
+        // },
       );
       return UserSession.fromJson(response.data);
     } on DioException catch (e) {
