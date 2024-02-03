@@ -6,6 +6,7 @@ import 'package:carro_flutter_app/core/route/route_index.dart';
 import 'package:carro_flutter_app/core/route/route_manager.dart';
 import 'package:carro_flutter_app/core/utils/shared_prefs.dart';
 import 'package:carro_flutter_app/main.dart';
+import 'package:carro_flutter_app/modules/authentication/register/entity/email_username_checking_response.dart';
 import 'package:carro_flutter_app/modules/authentication/register/entity/register.dart';
 import 'package:carro_flutter_app/modules/authentication/service/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,14 @@ class AuthController {
       print(userLoginData.token?.token);
       locator<CarroRouter>().navigateToAndRemoveUntil(CommonRoute.homePage);
       EasyLoading.dismiss();
-    } else {}
+    } else {
+      EasyLoading.dismiss();
+      EasyLoading.showError(
+        'Login Error, please try again.',
+        dismissOnTap: false,
+        duration: const Duration(seconds: 2),
+      );
+    }
 
     // else {
     //   EasyLoading.showError(
@@ -56,6 +64,59 @@ class AuthController {
       context.read<ThemeProvider>().setSelectedIndex(0);
       locator<CarroRouter>().navigateToAndRemoveUntil(CommonRoute.loginPage);
       EasyLoading.dismiss();
+    }
+  }
+
+  Future<bool> checkEmailRegister(String email) async {
+    EasyLoading.show(dismissOnTap: false);
+    EmailUsernameCheckingResponse? checkEmailResponse =
+        await AuthService.emailChecking(email: email);
+    if (checkEmailResponse?.status == "ok") {
+      EasyLoading.dismiss();
+      return false;
+    } else if (checkEmailResponse?.status == "error") {
+      EasyLoading.dismiss();
+      EasyLoading.showError(
+        checkEmailResponse?.message ?? "Email already registered.",
+        dismissOnTap: false,
+        duration: const Duration(seconds: 2),
+      );
+      return true;
+    } else {
+      EasyLoading.dismiss();
+      EasyLoading.showError(
+        'Error, please try again.',
+        dismissOnTap: false,
+        duration: const Duration(seconds: 2),
+      );
+      return false;
+    }
+  }
+
+  Future<bool> checkUsernameRegister(String username) async {
+    // EasyLoading.show(dismissOnTap: false);
+    EmailUsernameCheckingResponse? checkUsernameResponse =
+        await AuthService.usernameChecking(username: username);
+    if (checkUsernameResponse?.status == "ok") {
+      return false;
+      // locator<CarroRouter>().navigateToAndRemoveUntil(CommonRoute.homePage);
+      // EasyLoading.dismiss();
+    } else if (checkUsernameResponse?.status == "error") {
+      return true;
+      // EasyLoading.dismiss();
+      // EasyLoading.showError(
+      //   checkUsernameResponse?.message ?? "Username already taken.",
+      //   dismissOnTap: false,
+      //   duration: const Duration(seconds: 2),
+      // );
+    } else {
+      EasyLoading.dismiss();
+      EasyLoading.showError(
+        'Error, please try again.',
+        dismissOnTap: false,
+        duration: const Duration(seconds: 2),
+      );
+      return false;
     }
   }
 

@@ -3,6 +3,7 @@ import 'package:carro_flutter_app/core/models/lougout_response.dart';
 import 'package:carro_flutter_app/core/models/user_session.dart';
 import 'package:carro_flutter_app/core/network/api.dart';
 import 'package:carro_flutter_app/core/utils/shared_prefs.dart';
+import 'package:carro_flutter_app/modules/authentication/register/entity/email_username_checking_response.dart';
 import 'package:carro_flutter_app/modules/authentication/register/entity/register.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -73,6 +74,44 @@ class AuthService {
       // EasyLoading.showError('Error logging out, please try again');
     } catch (e) {
       EasyLoading.showError('Error logging out, please try again');
+    }
+  }
+
+  static Future<EmailUsernameCheckingResponse?> usernameChecking(
+      {required String username}) async {
+    try {
+      Response<dynamic> response = await dio.post(
+        url: '/register/checkUsername',
+        queryParameters: {
+          "username": username,
+        },
+      );
+
+      print(response);
+      return EmailUsernameCheckingResponse.fromJson(response.data);
+    } on DioException catch (e) {
+      DioErrorHelper().showDialog(e);
+      // EasyLoading.showError('Error logging out, please try again');
+    } catch (e) {
+      EasyLoading.showError('Error, please try again');
+    }
+  }
+
+  static Future<EmailUsernameCheckingResponse?> emailChecking(
+      {required String email}) async {
+    try {
+      Response<dynamic> response = await dio.post(
+        url: '/register/checkEmail',
+        queryParameters: {
+          "email": email,
+        },
+      );
+      return EmailUsernameCheckingResponse.fromJson(response.data);
+    } on DioException catch (e) {
+      DioErrorHelper().showDialog(e);
+      // EasyLoading.showError('Error logging out, please try again');
+    } catch (e) {
+      EasyLoading.showError('Error, please try again');
     }
   }
 }

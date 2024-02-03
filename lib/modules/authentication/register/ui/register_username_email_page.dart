@@ -1,8 +1,10 @@
+import 'package:carro_flutter_app/core/controller/auth_controller.dart';
 import 'package:carro_flutter_app/core/route/route_index.dart';
 import 'package:carro_flutter_app/core/route/route_manager.dart';
 import 'package:carro_flutter_app/core/theme/colors.dart';
 import 'package:carro_flutter_app/core/theme/dimens.dart';
 import 'package:carro_flutter_app/core/theme/styles.dart';
+import 'package:carro_flutter_app/core/utils/debouncer.dart';
 import 'package:carro_flutter_app/core/utils/form_checker.dart';
 import 'package:carro_flutter_app/core/widget/rounded_button.dart';
 import 'package:carro_flutter_app/main.dart';
@@ -27,6 +29,9 @@ class _RegisterUsernameEmailPageState extends State<RegisterUsernameEmailPage> {
   TextEditingController emailController = TextEditingController();
   String? emailErrorMessage;
   String? usernameErrorMessage;
+  bool showUsernameTakenMessage = false;
+  bool showEmailTakenMessage = false;
+  final _debouncer = Debouncer(milliseconds: 300);
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +51,7 @@ class _RegisterUsernameEmailPageState extends State<RegisterUsernameEmailPage> {
               child: RoundedButton(
                   buttonText: 'Next',
                   onTap: () {
-                    nextButtonFunction(registerModel);
+                    nextButtonFunction(registerModel, context);
                     setState(() {});
                   }),
             );
@@ -180,7 +185,13 @@ class _RegisterUsernameEmailPageState extends State<RegisterUsernameEmailPage> {
                                       context, CarroColors.textInputColor),
                                 ),
                               ),
-                              onChanged: (data) {
+                              onChanged: (data) async {
+                                if (usernameController.text.length >= 8) {
+                                  showUsernameTakenMessage =
+                                      await AuthController(context: context)
+                                          .checkUsernameRegister(data);
+                                }
+
                                 if (usernameController.text.isNotEmpty) {
                                   if (FormChecker().usernameChecker(data) ==
                                       false) {
@@ -195,6 +206,26 @@ class _RegisterUsernameEmailPageState extends State<RegisterUsernameEmailPage> {
 
                                 setState(() {});
                               },
+                            ),
+                            showUsernameTakenMessage == false
+                                ? const SizedBox.shrink()
+                                : Container(
+                                    padding: const EdgeInsets.only(
+                                        left: Dimensions.dp_5,
+                                        top: Dimensions.dp_5),
+                                    child: Text(
+                                      'Username has been taken.',
+                                      style: CarroTextStyles.medium_item_text
+                                          .copyWith(
+                                        color: CarroColors.getColor(
+                                          context,
+                                          CarroColors.fail,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                            const SizedBox(
+                              height: Dimensions.dp_3,
                             ),
                             usernameErrorMessage == null
                                 ? const SizedBox.shrink()
@@ -291,7 +322,8 @@ class _RegisterUsernameEmailPageState extends State<RegisterUsernameEmailPage> {
     );
   }
 
-  nextButtonFunction(RegisterProvider registerModel) {
+  nextButtonFunction(
+      RegisterProvider registerModel, BuildContext context) async {
     if (usernameController.text.isNotEmpty && emailController.text.isNotEmpty) {
       if (FormChecker().emailChecker(emailController.text.toString()) == true &&
           FormChecker().usernameChecker(usernameController.text.toString()) ==
@@ -305,12 +337,19 @@ class _RegisterUsernameEmailPageState extends State<RegisterUsernameEmailPage> {
           ),
           page: CommonRoute.registerUsernameEmailPage,
         );
-        Future.delayed(const Duration(milliseconds: 150), () {
-          //This is use to upgrade current page, so next page will show this page is being go through
-          registerModel
-              .registerProgressUpdater(CommonRoute.registerUsernameEmailPage);
-        });
-        locator<CarroRouter>().navigateTo(CommonRoute.registerNamePage);
+
+        if (showUsernameTakenMessage == false) {
+          bool checkEmailResult = await AuthController(context: context)
+              .checkEmailRegister(emailController.text);
+          if (checkEmailResult == false) {
+            Future.delayed(const Duration(milliseconds: 150), () {
+              //This is use to upgrade current page, so next page will show this page is being go through
+              registerModel.registerProgressUpdater(
+                  CommonRoute.registerUsernameEmailPage);
+            });
+            locator<CarroRouter>().navigateTo(CommonRoute.registerNamePage);
+          }
+        }
       } else {
         if (FormChecker().emailChecker(emailController.text.toString()) ==
             false) {
