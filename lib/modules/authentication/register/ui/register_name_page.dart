@@ -44,6 +44,7 @@ class _RegisterNamePageState extends State<RegisterNamePage> {
               child: RoundedButton(
                   buttonText: 'Next',
                   onTap: () {
+                    FocusScope.of(context).unfocus();
                     nextButtonFunction(registerModel);
                     setState(() {});
                   }
@@ -75,6 +76,7 @@ class _RegisterNamePageState extends State<RegisterNamePage> {
                     leading: RegisterTopBarWidget(
                       titleAppBar: '',
                       onTap: () {
+                        FocusScope.of(context).unfocus();
                         registerModel.resetToPageProgressUpdater(
                             CommonRoute.registerUsernameEmailPage);
                         locator<CarroRouter>().pop();

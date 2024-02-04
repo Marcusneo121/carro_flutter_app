@@ -184,8 +184,4 @@ class RegisterProvider extends ViewStateModel {
   displayRegisterData() {
     print(registrationData.toJson());
   }
-
-  registerAccount() {
-    
-  }
 }

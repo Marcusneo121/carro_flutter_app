@@ -51,6 +51,7 @@ class _RegisterUsernameEmailPageState extends State<RegisterUsernameEmailPage> {
               child: RoundedButton(
                   buttonText: 'Next',
                   onTap: () {
+                    FocusScope.of(context).unfocus();
                     nextButtonFunction(registerModel, context);
                     setState(() {});
                   }),
@@ -70,6 +71,7 @@ class _RegisterUsernameEmailPageState extends State<RegisterUsernameEmailPage> {
                       titleAppBar: '',
                       icon: Icons.close_rounded,
                       onTap: () {
+                        FocusScope.of(context).unfocus();
                         showCupertinoDialog(
                             context: context,
                             builder: (_) => CupertinoAlertDialog(
@@ -187,9 +189,12 @@ class _RegisterUsernameEmailPageState extends State<RegisterUsernameEmailPage> {
                               ),
                               onChanged: (data) async {
                                 if (usernameController.text.length >= 8) {
-                                  showUsernameTakenMessage =
-                                      await AuthController(context: context)
-                                          .checkUsernameRegister(data);
+                                  _debouncer.run(() async {
+                                    showUsernameTakenMessage =
+                                        await AuthController(context: context)
+                                            .checkUsernameRegister(data);
+                                    setState(() {});
+                                  });
                                 }
 
                                 if (usernameController.text.isNotEmpty) {
@@ -339,9 +344,12 @@ class _RegisterUsernameEmailPageState extends State<RegisterUsernameEmailPage> {
         );
 
         if (showUsernameTakenMessage == false) {
-          bool checkEmailResult = await AuthController(context: context)
-              .checkEmailRegister(emailController.text);
-          if (checkEmailResult == false) {
+          bool checkEmailUsernameResult = await AuthController(context: context)
+              .checkEmailUsernameRegister(
+                  email: emailController.text.toString(),
+                  username: usernameController.text.toString());
+
+          if (checkEmailUsernameResult == false) {
             Future.delayed(const Duration(milliseconds: 150), () {
               //This is use to upgrade current page, so next page will show this page is being go through
               registerModel.registerProgressUpdater(

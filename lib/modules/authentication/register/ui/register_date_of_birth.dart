@@ -43,6 +43,7 @@ class _RegisterDateOfBirthPageState extends State<RegisterDateOfBirthPage> {
               child: RoundedButton(
                 buttonText: 'Next',
                 onTap: () {
+                  FocusScope.of(context).unfocus();
                   registerModel.setRegisterDataClass(
                     data: RegisterData(
                       dateOfBirth: selectedDateTime,
@@ -73,6 +74,7 @@ class _RegisterDateOfBirthPageState extends State<RegisterDateOfBirthPage> {
                     leading: RegisterTopBarWidget(
                       titleAppBar: '',
                       onTap: () {
+                        FocusScope.of(context).unfocus();
                         registerModel.resetToPageProgressUpdater(
                             CommonRoute.registerPhoneNumberPage);
                         locator<CarroRouter>().pop();

@@ -47,6 +47,7 @@ class _RegisterPasswordPageState extends State<RegisterPasswordPage> {
               child: RoundedButton(
                   buttonText: 'Next',
                   onTap: () {
+                    FocusScope.of(context).unfocus();
                     nextButtonFunction(registerModel);
                     setState(() {});
                   }
@@ -76,6 +77,7 @@ class _RegisterPasswordPageState extends State<RegisterPasswordPage> {
                       titleAppBar: '',
                       // icon: Icons.close_rounded,
                       onTap: () {
+                        FocusScope.of(context).unfocus();
                         registerModel.resetToPageProgressUpdater(
                             CommonRoute.registerNamePage);
                         locator<CarroRouter>().pop();

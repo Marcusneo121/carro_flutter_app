@@ -67,6 +67,57 @@ class AuthController {
     }
   }
 
+  Future<bool> checkEmailUsernameRegister(
+      {required String username, required String email}) async {
+    EasyLoading.show(dismissOnTap: false);
+    EmailUsernameCheckingResponse? checkEmailResponse =
+        await AuthService.emailChecking(email: email);
+
+    EmailUsernameCheckingResponse? checkUsernameResponse =
+        await AuthService.usernameChecking(username: username);
+
+    if (checkEmailResponse?.status == "ok" &&
+        checkUsernameResponse?.status == "ok") {
+      EasyLoading.dismiss();
+      return false;
+    } else if (checkEmailResponse?.status == "error" &&
+        checkUsernameResponse?.status == "ok") {
+      EasyLoading.dismiss();
+      EasyLoading.showError(
+        "Email already registered.",
+        dismissOnTap: false,
+        duration: const Duration(seconds: 2),
+      );
+      return true;
+    } else if (checkEmailResponse?.status == "ok" &&
+        checkUsernameResponse?.status == "error") {
+      EasyLoading.dismiss();
+      EasyLoading.showError(
+        "Username already taken.",
+        dismissOnTap: false,
+        duration: const Duration(seconds: 2),
+      );
+      return true;
+    } else if (checkEmailResponse?.status == "error" &&
+        checkUsernameResponse?.status == "error") {
+      EasyLoading.dismiss();
+      EasyLoading.showError(
+        "Username and Email already registered. Please try others.",
+        dismissOnTap: false,
+        duration: const Duration(seconds: 2),
+      );
+      return true;
+    } else {
+      EasyLoading.dismiss();
+      EasyLoading.showError(
+        'Something went wrong, please try again.',
+        dismissOnTap: false,
+        duration: const Duration(seconds: 2),
+      );
+      return true;
+    }
+  }
+
   Future<bool> checkEmailRegister(String email) async {
     EasyLoading.show(dismissOnTap: false);
     EmailUsernameCheckingResponse? checkEmailResponse =

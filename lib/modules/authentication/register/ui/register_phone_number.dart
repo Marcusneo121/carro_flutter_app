@@ -11,6 +11,7 @@ import 'package:carro_flutter_app/modules/authentication/register/ui/widgets/reg
 import 'package:carro_flutter_app/modules/authentication/register/view_model/register_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class RegisterPhoneNumberPage extends StatefulWidget {
@@ -44,6 +45,7 @@ class _RegisterPhoneNumberPageState extends State<RegisterPhoneNumberPage> {
               child: RoundedButton(
                 buttonText: 'Next',
                 onTap: () {
+                  FocusScope.of(context).unfocus();
                   if (phoneNumberController.text.isEmpty) {
                     phoneNumberErrorMessage = 'Phone number cannot be empty';
                     setState(() {});
@@ -80,6 +82,7 @@ class _RegisterPhoneNumberPageState extends State<RegisterPhoneNumberPage> {
                     leading: RegisterTopBarWidget(
                       titleAppBar: '',
                       onTap: () {
+                        FocusScope.of(context).unfocus();
                         registerModel.resetToPageProgressUpdater(
                             CommonRoute.registerPasswordPage);
                         locator<CarroRouter>().pop();
@@ -174,7 +177,12 @@ class _RegisterPhoneNumberPageState extends State<RegisterPhoneNumberPage> {
                                   child: TextFormField(
                                     style: CarroTextStyles.normal_text_bold,
                                     controller: phoneNumberController,
-                                    keyboardType: TextInputType.number,
+                                    keyboardType:
+                                        const TextInputType.numberWithOptions(
+                                            signed: true),
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly,
+                                    ],
                                     textAlign: TextAlign.left,
                                     decoration: InputDecoration(
                                         // hintText: 'Username',

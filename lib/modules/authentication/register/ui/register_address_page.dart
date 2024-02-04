@@ -51,6 +51,7 @@ class _RegisterAddressPageState extends State<RegisterAddressPage> {
               child: RoundedButton(
                   buttonText: 'Next',
                   onTap: () {
+                    FocusScope.of(context).unfocus();
                     nextButtonFunction(registerModel);
                     setState(() {});
                   }
@@ -79,6 +80,7 @@ class _RegisterAddressPageState extends State<RegisterAddressPage> {
                     leading: RegisterTopBarWidget(
                       titleAppBar: '',
                       onTap: () {
+                        FocusScope.of(context).unfocus();
                         registerModel.resetToPageProgressUpdater(
                             CommonRoute.registerDateOfBirthPage);
                         locator<CarroRouter>().pop();

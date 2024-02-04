@@ -43,8 +43,9 @@ class _RegisterConfirmationPageState extends State<RegisterConfirmationPage> {
               child: RoundedButton(
                 buttonText: 'Create Account',
                 onTap: () {
-                  AuthController(context: context)
-                      .register(data: registerModel.registrationData);
+                  FocusScope.of(context).unfocus();
+                  // AuthController(context: context)
+                  //     .register(data: registerModel.registrationData);
                   // registerModel.displayRegisterData();
                   // locator<CarroRouter>()
                   //     .navigateTo(CommonRoute.registerAddressPage);
@@ -65,6 +66,7 @@ class _RegisterConfirmationPageState extends State<RegisterConfirmationPage> {
                     leading: RegisterTopBarWidget(
                       titleAppBar: '',
                       onTap: () {
+                        FocusScope.of(context).unfocus();
                         registerModel.resetToPageProgressUpdater(
                             CommonRoute.registerAddressPage);
                         locator<CarroRouter>().pop();

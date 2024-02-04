@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
                 TextFormField(
                   style: CarroTextStyles.normal_text_bold,
                   controller: usernameController,
-                  keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.text,
                   textAlign: TextAlign.left,
                   decoration: InputDecoration(
                     hintText: 'Username',
