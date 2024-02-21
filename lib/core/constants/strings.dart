@@ -9,4 +9,6 @@ const String ACCEPT = "accept";
 const String AUTHORIZATION = "authorization";
 const String DEFAULT_LANGUAGE = "en";
 const String TOKEN = "token";
-const String BASE_URL = "http://localhost:3333";
+// const String BASE_URL = "https://carro-adonis-api-49f39430a722.herokuapp.com";
+const String BASE_URL = "https://carro-backend-api-y6huzg3uoq-uc.a.run.app";
+// const String BASE_URL = "http://localhost:3333";

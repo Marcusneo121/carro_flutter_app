@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class HomeProvider extends ViewStateModel {
   List<Post> post = [];
-  late List<Car> cars;
+  List<Car> cars = [];
 
   HomeProvider() {
     //call api here initializ

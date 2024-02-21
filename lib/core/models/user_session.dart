@@ -50,7 +50,7 @@ class User {
   int? roleId;
   String? username;
   String? email;
-  Null? rememberMeToken;
+  String? rememberMeToken;
   String? createdAt;
   String? updatedAt;
 
@@ -97,7 +97,7 @@ class Profile {
   String? age;
   String? phoneNumber;
   String? dateOfBirth;
-  Null? profileImage;
+  String? profileImage;
   String? createdAt;
   String? updatedAt;
 

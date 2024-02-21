@@ -24,12 +24,11 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: Dimensions.dp_40),
-      color: CarroColors.getColor(context, CarroColors.scaffoldBackgroundColor),
-      child: SafeArea(
-        child: Scaffold(
-          body: Center(
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: Dimensions.dp_40),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -47,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
                 TextFormField(
                   style: CarroTextStyles.normal_text_bold,
                   controller: usernameController,
-                  keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.text,
                   textAlign: TextAlign.left,
                   decoration: InputDecoration(
                     hintText: 'Username',
@@ -109,8 +108,39 @@ class _LoginPageState extends State<LoginPage> {
                 RoundedButton(
                   buttonText: 'Login',
                   onTap: () {
-                    AuthController(context: context).login(usernameController.text, passwordController.text);
+                    AuthController(context: context).login(
+                        usernameController.text, passwordController.text);
                   },
+                ),
+                Divider(
+                  height: Dimensions.dp_100,
+                  thickness: 1,
+                  indent: Dimensions.dp_40,
+                  endIndent: Dimensions.dp_40,
+                  color:
+                      CarroColors.getColor(context, CarroColors.textInputColor),
+                ),
+                const Text(
+                  "Don't have an account?",
+                  // style: TextStyle(
+                  //   color: Colors.white,
+                  //   fontWeight: FontWeight.w600,
+                  //   fontFamily: 'Poppins',
+                  //   fontSize: 16.0,
+                  // ),
+                  style: CarroTextStyles.large_normal_text_bold,
+                ),
+                TextButton(
+                  onPressed: () {
+                    //Get.toNamed('/login/registration');
+                    //Navigator.pushNamed(context, Registration.id);
+                    locator<CarroRouter>()
+                        .navigateTo(CommonRoute.registerUsernameEmailPage);
+                  },
+                  child: const Text(
+                    'Sign Up',
+                    style: CarroTextStyles.small_label_bold,
+                  ),
                 ),
               ],
             ),

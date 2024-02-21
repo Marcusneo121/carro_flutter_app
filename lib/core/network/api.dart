@@ -7,6 +7,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class DioErrorHelper {
   showDialog(DioException e) {
+    if (e.type == DioExceptionType.connectionError ||
+        e.type == DioExceptionType.connectionTimeout) {
+      EasyLoading.dismiss();
+      EasyLoading.showError(
+          'Connection Error. Please check internet connection.');
+    }
+
     if (e.response != null) {
       switch (e.response?.statusCode) {
         case 422: //unprocessable entity

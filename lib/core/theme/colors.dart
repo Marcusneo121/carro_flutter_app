@@ -1,4 +1,5 @@
 import 'package:carro_flutter_app/core/provider/view_model/theme_provider.dart';
+import 'package:carro_flutter_app/modules/home/entity/car.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -51,6 +52,13 @@ class CarroColors {
 
   static final textInputColorDark = Colors.grey.shade400;
 
+  static final registerHeadlineColor = Colors.black.withOpacity(1.0);
+
+  static const registerHeadlineColorDark = Colors.white;
+
+  static const fail = Color(0xFFFF333A);
+  static const failDark = Color.fromARGB(255, 198, 35, 41);
+
   /// Dark Theme Color Map
   static final Map<Color, Color> _darkColor = {
     CarroColors.black_1: CarroColors.black_1,
@@ -61,6 +69,8 @@ class CarroColors {
     CarroColors.iconColor: CarroColors.iconColorDark,
     CarroColors.iconBackgroundColor: CarroColors.iconBackgroundColorDark,
     CarroColors.textInputColor: CarroColors.textInputColorDark,
+    CarroColors.registerHeadlineColor: CarroColors.registerHeadlineColorDark,
+    CarroColors.fail: CarroColors.failDark,
   };
 
   static bool isDarkTheme(BuildContext context) {

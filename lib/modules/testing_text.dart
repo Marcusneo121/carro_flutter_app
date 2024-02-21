@@ -1,11 +1,22 @@
 import 'package:carro_flutter_app/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 
+
 class TestingTextSize extends StatelessWidget {
   const TestingTextSize({super.key});
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController controller = TextEditingController();
+    var password = 'DarkestarzZ2@';
+    String hashedPassword =
+        "\$argon2id\$v=19\$t=3,m=4096,p=1\$yvkDZSZKjcLtpWTMzv0wHg\$8YnWwqOkaKeC595DbPo4VqdjhYlx3rwXcHHNt4C1XYk";
+
+    decrypt() {
+      print('Decrypting.....');
+      
+    }
+
     return SafeArea(
       child: Scaffold(
         body: Center(
@@ -72,6 +83,15 @@ class TestingTextSize extends StatelessWidget {
                 "Label Small",
                 style: Theme.of(context).textTheme.labelSmall,
               ),
+              TextField(
+                controller: controller,
+              ),
+              TextButton(
+                onPressed: () async {
+                  decrypt();
+                },
+                child: const Text('Decrypt'),
+              )
             ],
           ),
         ),

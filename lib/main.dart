@@ -3,6 +3,7 @@ import 'package:carro_flutter_app/core/provider/view_model/theme_provider.dart';
 import 'package:carro_flutter_app/core/route/route_manager.dart';
 import 'package:carro_flutter_app/core/utils/shared_prefs.dart';
 import 'package:carro_flutter_app/main_init.dart';
+import 'package:carro_flutter_app/modules/authentication/register/view_model/register_model.dart';
 import 'package:carro_flutter_app/modules/home/view_model/home_model.dart';
 import 'package:carro_flutter_app/modules/settings/view_model/settings_model.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,7 @@ Future main() async {
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
         ChangeNotifierProvider(create: (context) => SettingsProvider()),
         ChangeNotifierProvider(create: (context) => HomeProvider()),
+        ChangeNotifierProvider(create: (context) => RegisterProvider()),
       ],
       child: const CarroInit(),
     ),
