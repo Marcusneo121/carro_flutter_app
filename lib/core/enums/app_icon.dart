@@ -1,0 +1,4 @@
+enum AppIcon {
+  dark,
+  light,
+}

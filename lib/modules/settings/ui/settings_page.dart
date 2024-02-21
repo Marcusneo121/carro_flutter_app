@@ -28,6 +28,7 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
+    SharedPrefs sharef = SharedPrefs();
     // final SettingsProvider settingsModel =
     //     Provider.of<SettingsProvider>(context);
 
@@ -55,9 +56,10 @@ class _SettingsPageState extends State<SettingsPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Marcus Neo',
-                        style: themeData.textTheme.headlineSmall?.copyWith(
-                            fontSize: 22, fontWeight: FontWeight.w600),
+                        '${sharef.userSessionData.data?.profile?.firstName} ${sharef.userSessionData.data?.profile?.lastName}',
+                        style: CarroTextStyles.medium_title_bold,
+                        // style: themeData.textTheme.headlineSmall?.copyWith(
+                        //     fontSize: 22, fontWeight: FontWeight.w600),
                       ),
                       const SizedBox(height: 3),
                       InkWell(

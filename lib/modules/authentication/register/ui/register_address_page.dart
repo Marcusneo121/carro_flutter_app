@@ -5,6 +5,7 @@ import 'package:carro_flutter_app/core/theme/dimens.dart';
 import 'package:carro_flutter_app/core/theme/styles.dart';
 import 'package:carro_flutter_app/core/widget/rounded_button.dart';
 import 'package:carro_flutter_app/main.dart';
+import 'package:carro_flutter_app/modules/authentication/register/entity/register.dart';
 import 'package:carro_flutter_app/modules/authentication/register/ui/widgets/register_progress_bar_widget.dart';
 import 'package:carro_flutter_app/modules/authentication/register/ui/widgets/register_top_bar_widget.dart';
 import 'package:carro_flutter_app/modules/authentication/register/view_model/register_model.dart';
@@ -27,6 +28,11 @@ class _RegisterAddressPageState extends State<RegisterAddressPage> {
   TextEditingController stateController = TextEditingController();
   TextEditingController cityController = TextEditingController();
 
+  String? address1ErrorMessage;
+  String? poscodeErrorMessage;
+  String? cityErrorMessage;
+  String? stateErrorMessage;
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -43,15 +49,22 @@ class _RegisterAddressPageState extends State<RegisterAddressPage> {
                 bottom: Dimensions.dp_40,
               ),
               child: RoundedButton(
-                buttonText: 'Next',
-                onTap: () {
-                  // AuthController(context: context).login(
-                  //     usernameController.text,
-                  //     passwordController.text);
-                  locator<CarroRouter>()
-                      .navigateTo(CommonRoute.registerAddressPage);
-                },
-              ),
+                  buttonText: 'Next',
+                  onTap: () {
+                    FocusScope.of(context).unfocus();
+                    nextButtonFunction(registerModel);
+                    setState(() {});
+                  }
+                  // onTap: () {
+                  //   Future.delayed(const Duration(milliseconds: 150), () {
+                  //     //This is use to upgrade current page, so next page will show this page is being go through
+                  //     registerModel.registerProgressUpdater(
+                  //         CommonRoute.registerAddressPage);
+                  //   });
+                  //   locator<CarroRouter>()
+                  //       .navigateTo(CommonRoute.registerConfirmationPage);
+                  // },
+                  ),
             );
           },
         ),
@@ -67,8 +80,9 @@ class _RegisterAddressPageState extends State<RegisterAddressPage> {
                     leading: RegisterTopBarWidget(
                       titleAppBar: '',
                       onTap: () {
+                        FocusScope.of(context).unfocus();
                         registerModel.resetToPageProgressUpdater(
-                            CommonRoute.registerUsernameEmailPage);
+                            CommonRoute.registerDateOfBirthPage);
                         locator<CarroRouter>().pop();
                       },
                     ),
@@ -146,7 +160,7 @@ class _RegisterAddressPageState extends State<RegisterAddressPage> {
                             TextFormField(
                               style: CarroTextStyles.normal_text_bold,
                               controller: address1Controller,
-                              keyboardType: TextInputType.name,
+                              keyboardType: TextInputType.text,
                               textAlign: TextAlign.left,
                               decoration: InputDecoration(
                                 // hintText: 'Username',
@@ -156,7 +170,30 @@ class _RegisterAddressPageState extends State<RegisterAddressPage> {
                                       context, CarroColors.textInputColor),
                                 ),
                               ),
+                              onChanged: (value) {
+                                if (address1Controller.text.isNotEmpty) {
+                                  address1ErrorMessage = null;
+                                  setState(() {});
+                                }
+                              },
                             ),
+                            address1ErrorMessage == null
+                                ? const SizedBox.shrink()
+                                : Container(
+                                    padding: const EdgeInsets.only(
+                                        left: Dimensions.dp_5,
+                                        top: Dimensions.dp_5),
+                                    child: Text(
+                                      address1ErrorMessage ?? '',
+                                      style: CarroTextStyles.medium_item_text
+                                          .copyWith(
+                                        color: CarroColors.getColor(
+                                          context,
+                                          CarroColors.fail,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                             const SizedBox(
                               height: Dimensions.dp_15,
                             ),
@@ -178,7 +215,7 @@ class _RegisterAddressPageState extends State<RegisterAddressPage> {
                             TextFormField(
                               style: CarroTextStyles.normal_text_bold,
                               controller: address2Controller,
-                              keyboardType: TextInputType.name,
+                              keyboardType: TextInputType.text,
                               textAlign: TextAlign.left,
                               decoration: InputDecoration(
                                 // hintText: 'Username',
@@ -210,7 +247,7 @@ class _RegisterAddressPageState extends State<RegisterAddressPage> {
                             TextFormField(
                               style: CarroTextStyles.normal_text_bold,
                               controller: address3Controller,
-                              keyboardType: TextInputType.name,
+                              keyboardType: TextInputType.text,
                               textAlign: TextAlign.left,
                               decoration: InputDecoration(
                                 // hintText: 'Username',
@@ -242,7 +279,7 @@ class _RegisterAddressPageState extends State<RegisterAddressPage> {
                             TextFormField(
                               style: CarroTextStyles.normal_text_bold,
                               controller: poscodeController,
-                              keyboardType: TextInputType.name,
+                              keyboardType: TextInputType.number,
                               textAlign: TextAlign.left,
                               decoration: InputDecoration(
                                 // hintText: 'Username',
@@ -252,7 +289,30 @@ class _RegisterAddressPageState extends State<RegisterAddressPage> {
                                       context, CarroColors.textInputColor),
                                 ),
                               ),
+                              onChanged: (value) {
+                                if (poscodeController.text.isNotEmpty) {
+                                  poscodeErrorMessage = null;
+                                  setState(() {});
+                                }
+                              },
                             ),
+                            poscodeErrorMessage == null
+                                ? const SizedBox.shrink()
+                                : Container(
+                                    padding: const EdgeInsets.only(
+                                        left: Dimensions.dp_5,
+                                        top: Dimensions.dp_5),
+                                    child: Text(
+                                      poscodeErrorMessage ?? '',
+                                      style: CarroTextStyles.medium_item_text
+                                          .copyWith(
+                                        color: CarroColors.getColor(
+                                          context,
+                                          CarroColors.fail,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                             const SizedBox(
                               height: Dimensions.dp_15,
                             ),
@@ -274,7 +334,7 @@ class _RegisterAddressPageState extends State<RegisterAddressPage> {
                             TextFormField(
                               style: CarroTextStyles.normal_text_bold,
                               controller: cityController,
-                              keyboardType: TextInputType.name,
+                              keyboardType: TextInputType.text,
                               textAlign: TextAlign.left,
                               decoration: InputDecoration(
                                 // hintText: 'Username',
@@ -284,7 +344,30 @@ class _RegisterAddressPageState extends State<RegisterAddressPage> {
                                       context, CarroColors.textInputColor),
                                 ),
                               ),
+                              onChanged: (value) {
+                                if (cityController.text.isNotEmpty) {
+                                  cityErrorMessage = null;
+                                  setState(() {});
+                                }
+                              },
                             ),
+                            cityErrorMessage == null
+                                ? const SizedBox.shrink()
+                                : Container(
+                                    padding: const EdgeInsets.only(
+                                        left: Dimensions.dp_5,
+                                        top: Dimensions.dp_5),
+                                    child: Text(
+                                      cityErrorMessage ?? '',
+                                      style: CarroTextStyles.medium_item_text
+                                          .copyWith(
+                                        color: CarroColors.getColor(
+                                          context,
+                                          CarroColors.fail,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                             const SizedBox(
                               height: Dimensions.dp_15,
                             ),
@@ -306,7 +389,7 @@ class _RegisterAddressPageState extends State<RegisterAddressPage> {
                             TextFormField(
                               style: CarroTextStyles.normal_text_bold,
                               controller: stateController,
-                              keyboardType: TextInputType.name,
+                              keyboardType: TextInputType.text,
                               textAlign: TextAlign.left,
                               decoration: InputDecoration(
                                 // hintText: 'Username',
@@ -316,7 +399,30 @@ class _RegisterAddressPageState extends State<RegisterAddressPage> {
                                       context, CarroColors.textInputColor),
                                 ),
                               ),
+                              onChanged: (value) {
+                                if (stateController.text.isNotEmpty) {
+                                  stateErrorMessage = null;
+                                  setState(() {});
+                                }
+                              },
                             ),
+                            stateErrorMessage == null
+                                ? const SizedBox.shrink()
+                                : Container(
+                                    padding: const EdgeInsets.only(
+                                        left: Dimensions.dp_5,
+                                        top: Dimensions.dp_5),
+                                    child: Text(
+                                      stateErrorMessage ?? '',
+                                      style: CarroTextStyles.medium_item_text
+                                          .copyWith(
+                                        color: CarroColors.getColor(
+                                          context,
+                                          CarroColors.fail,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                           ],
                         ),
                       ),
@@ -329,5 +435,50 @@ class _RegisterAddressPageState extends State<RegisterAddressPage> {
         ),
       ),
     );
+  }
+
+  nextButtonFunction(RegisterProvider registerModel) {
+    if (address1Controller.text.isNotEmpty &&
+        poscodeController.text.isNotEmpty &&
+        cityController.text.isNotEmpty &&
+        stateController.text.isNotEmpty) {
+      registerModel.setRegisterDataClass(
+        data: RegisterData(
+          address1: address1Controller.text.toString(),
+          address2: address2Controller.text.toString(),
+          address3: address3Controller.text.toString(),
+          poscode: poscodeController.text.toString(),
+          city: cityController.text.toString(),
+          state: stateController.text.toString(),
+        ),
+        page: CommonRoute.registerAddressPage,
+      );
+      Future.delayed(const Duration(milliseconds: 150), () {
+        //This is use to upgrade current page, so next page will show this page is being go through
+        registerModel.registerProgressUpdater(CommonRoute.registerAddressPage);
+      });
+      locator<CarroRouter>().navigateTo(CommonRoute.registerConfirmationPage);
+    } else {
+      if (address1Controller.text.isEmpty) {
+        address1ErrorMessage = 'Address 1 cannot be empty';
+      } else {
+        address1ErrorMessage = null;
+      }
+      if (poscodeController.text.isEmpty) {
+        poscodeErrorMessage = 'Poscode cannot be empty';
+      } else {
+        poscodeErrorMessage = null;
+      }
+      if (cityController.text.isEmpty) {
+        cityErrorMessage = 'City cannot be empty';
+      } else {
+        cityErrorMessage = null;
+      }
+      if (stateController.text.isEmpty) {
+        stateErrorMessage = 'State cannot be empty';
+      } else {
+        stateErrorMessage = null;
+      }
+    }
   }
 }

@@ -24,9 +24,9 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Center(
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: Dimensions.dp_40),
             child: Column(
@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
                 TextFormField(
                   style: CarroTextStyles.normal_text_bold,
                   controller: usernameController,
-                  keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.text,
                   textAlign: TextAlign.left,
                   decoration: InputDecoration(
                     hintText: 'Username',
@@ -138,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                         .navigateTo(CommonRoute.registerUsernameEmailPage);
                   },
                   child: const Text(
-                    'Create account',
+                    'Sign Up',
                     style: CarroTextStyles.small_label_bold,
                   ),
                 ),
