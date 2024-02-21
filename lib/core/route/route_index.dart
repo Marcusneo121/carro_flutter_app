@@ -12,4 +12,5 @@ class CommonRoute {
   static const String registerPhoneNumberPage = 'registerPhoneNumberPage';
   static const String registerDateOfBirthPage = 'registerDateOfBrithPage';
   static const String registerConfirmationPage = 'registerConfirmationPage';
+  static const String registerSuccessfulPage = 'registerSuccessfulPage';
 }

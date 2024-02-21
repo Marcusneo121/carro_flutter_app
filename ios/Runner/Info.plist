@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Carro Flutter App</string>
+	<string>Carro</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -47,5 +47,45 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+<!-- ...the rest of info.plist -->
+	<key>CFBundleIcons</key>
+            <dict>
+                <!-- Default app icon -->
+                <key>CFBundlePrimaryIcon</key>
+                <dict>
+                    <key>CFBundleIconFiles</key>
+                    <array>
+                        <string>dark</string>
+                    </array>
+                    <key>UIPrerenderedIcon</key>
+                    <false/>
+                </dict>
+
+                <key>CFBundleAlternateIcons</key>
+                <dict>
+                    <!-- First custom icon - Dark -->
+                    <key>dark</key>
+                    <dict>
+                        <key>CFBundleIconFiles</key>
+                        <array>
+                            <string>dark</string>
+                        </array>
+                        <key>UIPrerenderedIcon</key>
+                        <false/>
+                    </dict>
+
+                    <!-- Second custom icon - Light -->
+                    <key>light</key>
+                    <dict>
+                        <key>CFBundleIconFiles</key>
+                        <array>
+                            <string>light</string>
+                        </array>
+                        <key>UIPrerenderedIcon</key>
+                        <false/>
+                    </dict>
+                </dict>
+            </dict>
+<!-- ...the rest of info.plist -->	
 </dict>
 </plist>

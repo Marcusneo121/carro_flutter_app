@@ -92,6 +92,7 @@ class RegisterProvider extends ViewStateModel {
         page4Progress = false;
         page5Progress = false;
         page5Progress = false;
+        page6Progress = false;
         break;
       case CommonRoute.registerNamePage:
         page1Progress = true;
@@ -169,8 +170,8 @@ class RegisterProvider extends ViewStateModel {
         break;
       case CommonRoute.registerAddressPage:
         registrationData.address1 = data.address1;
-        registrationData.address2 = data.address2;
-        registrationData.address3 = data.address3;
+        registrationData.address2 = data.address2 == "" ? null : data.address2;
+        registrationData.address3 = data.address3 == "" ? null : data.address3;
         registrationData.poscode = data.poscode;
         registrationData.city = data.city;
         registrationData.state = data.state;

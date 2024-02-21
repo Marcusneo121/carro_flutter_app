@@ -138,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                         .navigateTo(CommonRoute.registerUsernameEmailPage);
                   },
                   child: const Text(
-                    'Create account',
+                    'Sign Up',
                     style: CarroTextStyles.small_label_bold,
                   ),
                 ),

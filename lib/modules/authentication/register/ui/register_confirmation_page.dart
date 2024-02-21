@@ -44,8 +44,8 @@ class _RegisterConfirmationPageState extends State<RegisterConfirmationPage> {
                 buttonText: 'Create Account',
                 onTap: () {
                   FocusScope.of(context).unfocus();
-                  // AuthController(context: context)
-                  //     .register(data: registerModel.registrationData);
+                  AuthController(context: context)
+                      .register(data: registerModel.registrationData);
                   // registerModel.displayRegisterData();
                   // locator<CarroRouter>()
                   //     .navigateTo(CommonRoute.registerAddressPage);

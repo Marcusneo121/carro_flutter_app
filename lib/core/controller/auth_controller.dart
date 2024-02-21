@@ -7,6 +7,7 @@ import 'package:carro_flutter_app/core/route/route_manager.dart';
 import 'package:carro_flutter_app/core/utils/shared_prefs.dart';
 import 'package:carro_flutter_app/main.dart';
 import 'package:carro_flutter_app/modules/authentication/register/entity/email_username_checking_response.dart';
+import 'package:carro_flutter_app/modules/authentication/register/entity/normal_api_response.dart';
 import 'package:carro_flutter_app/modules/authentication/register/entity/register.dart';
 import 'package:carro_flutter_app/modules/authentication/service/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -30,15 +31,16 @@ class AuthController {
       print(userLoginData.token?.token);
       locator<CarroRouter>().navigateToAndRemoveUntil(CommonRoute.homePage);
       EasyLoading.dismiss();
-    } else {
-      EasyLoading.dismiss();
-      EasyLoading.showError(
-        'Login Error, please try again.',
-        dismissOnTap: false,
-        duration: const Duration(seconds: 2),
-      );
     }
 
+    // else {
+    //   EasyLoading.dismiss();
+    //   EasyLoading.showError(
+    //     'Login Error, please try again.',
+    //     dismissOnTap: false,
+    //     duration: const Duration(seconds: 2),
+    //   );
+    // }
     // else {
     //   EasyLoading.showError(
     //     'Login Error, please try again.',
@@ -53,7 +55,25 @@ class AuthController {
     //     (Route<dynamic> route) => false);
   }
 
-  register({required RegisterData data}) {}
+  register({required RegisterData data}) async {
+    EasyLoading.show(dismissOnTap: false);
+    NormalApiResponse? userRegisterResponse = await AuthService.register(data);
+
+    if (userRegisterResponse != null) {
+      EasyLoading.dismiss();
+      locator<CarroRouter>()
+          .navigateToAndRemoveUntil(CommonRoute.registerSuccessfulPage);
+    }
+
+    // else {
+    //   EasyLoading.dismiss();
+    //   EasyLoading.showError(
+    //     'Registration Error, please try again.',
+    //     dismissOnTap: false,
+    //     duration: const Duration(seconds: 2),
+    //   );
+    // }
+  }
 
   logout() async {
     EasyLoading.show(dismissOnTap: false);

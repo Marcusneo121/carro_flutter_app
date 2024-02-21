@@ -8,6 +8,7 @@ import 'package:carro_flutter_app/modules/authentication/register/ui/register_na
 import 'package:carro_flutter_app/modules/authentication/register/ui/register_page.dart';
 import 'package:carro_flutter_app/modules/authentication/register/ui/register_password_page.dart';
 import 'package:carro_flutter_app/modules/authentication/register/ui/register_phone_number.dart';
+import 'package:carro_flutter_app/modules/authentication/register/ui/register_successful_page.dart';
 import 'package:carro_flutter_app/modules/authentication/register/ui/register_username_email_page.dart';
 import 'package:carro_flutter_app/modules/common/main_skeleton.dart';
 import 'package:flutter/cupertino.dart';
@@ -74,6 +75,9 @@ class CarroRouter {
       case CommonRoute.registerConfirmationPage:
         return getPageRouteFadeTransitionBuilder(
             settings, const RegisterConfirmationPage());
+      case CommonRoute.registerSuccessfulPage:
+        return getPageRouteFadeTransitionBuilder(
+            settings, const RegisterSuccessfulPage());
       // case CommonRoute.textPage:
       //   return MaterialPageRoute(
       //       builder: (_) => MainSkeleton(selectedTabIndex: 1));
