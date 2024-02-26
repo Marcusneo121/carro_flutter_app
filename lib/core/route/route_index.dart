@@ -14,3 +14,13 @@ class CommonRoute {
   static const String registerConfirmationPage = 'registerConfirmationPage';
   static const String registerSuccessfulPage = 'registerSuccessfulPage';
 }
+
+class CarRoute {
+  static const String module = "car/";
+  static const String addCar = 'addCarPage';
+  static const String addCar2 = 'addCarPage2';
+  static const String addCar3 = 'addCarPage3';
+  static const String addCar4 = 'addCarPage4';
+  static const String addCarConfirmationPage = 'addCarConfirmationPage';
+  static const String addCarSuccessfulPage = 'addCarSuccessfulPage';
+}

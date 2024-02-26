@@ -10,6 +10,12 @@ import 'package:carro_flutter_app/modules/authentication/register/ui/register_pa
 import 'package:carro_flutter_app/modules/authentication/register/ui/register_phone_number.dart';
 import 'package:carro_flutter_app/modules/authentication/register/ui/register_successful_page.dart';
 import 'package:carro_flutter_app/modules/authentication/register/ui/register_username_email_page.dart';
+import 'package:carro_flutter_app/modules/cars/add_car/ui/add_car_confirmation_page.dart';
+import 'package:carro_flutter_app/modules/cars/add_car/ui/add_car_fourth_page.dart';
+import 'package:carro_flutter_app/modules/cars/add_car/ui/add_car_page.dart';
+import 'package:carro_flutter_app/modules/cars/add_car/ui/add_car_second_page.dart';
+import 'package:carro_flutter_app/modules/cars/add_car/ui/add_car_successful_page.dart';
+import 'package:carro_flutter_app/modules/cars/add_car/ui/add_car_third_page.dart';
 import 'package:carro_flutter_app/modules/common/main_skeleton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +84,21 @@ class CarroRouter {
       case CommonRoute.registerSuccessfulPage:
         return getPageRouteFadeTransitionBuilder(
             settings, const RegisterSuccessfulPage());
-      // case CommonRoute.textPage:
+      case CarRoute.addCar:
+        return CupertinoPageRoute(builder: (_) => const AddCarPage());
+      case CarRoute.addCar2:
+        return CupertinoPageRoute(builder: (_) => const AddCarSecondPage());
+      case CarRoute.addCar3:
+        return CupertinoPageRoute(builder: (_) => const AddCarThirdPage());
+      case CarRoute.addCar4:
+        return CupertinoPageRoute(builder: (_) => const AddCarFourthPage());
+      case CarRoute.addCarConfirmationPage:
+        return CupertinoPageRoute(
+            builder: (_) => const AddCarConfirmationPage());
+      case CarRoute.addCarSuccessfulPage:
+        return getPageRouteFadeTransitionBuilder(
+            settings, const AddCarSuccessfulPage());
+      // case CommonRoute.textPage:s
       //   return MaterialPageRoute(
       //       builder: (_) => MainSkeleton(selectedTabIndex: 1));
       // case CommonRoute.settingsPage:

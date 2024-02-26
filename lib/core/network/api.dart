@@ -15,6 +15,7 @@ class DioErrorHelper {
     }
 
     if (e.response != null) {
+      print(e.response?.statusCode);
       switch (e.response?.statusCode) {
         case 422: //unprocessable entity
           EasyLoading.showError('Something went wrong, Please try again.');
@@ -25,6 +26,10 @@ class DioErrorHelper {
           break;
         case 401: //Not found
           EasyLoading.showError('Something went wrong, Please try again.');
+          break;
+        case 500: //Not found
+          EasyLoading.showError(
+              'Something went wrong on our side, Please try again later.');
           break;
         default:
       }
@@ -67,7 +72,7 @@ class DioFactory {
         ACCEPT: APPLICATION_JSON,
         AUTHORIZATION:
             'Bearer ${shapref.userSessionData.token?.token.toString()}',
-        DEFAULT_LANGUAGE: DEFAULT_LANGUAGE
+        DEFAULT_LANGUAGE: DEFAULT_LANGUAGE,
       }),
     );
 
@@ -84,7 +89,7 @@ class DioFactory {
       optionData = Options(headers: {
         CONTENT_TYPE: APPLICATION_JSON,
         ACCEPT: APPLICATION_JSON,
-        DEFAULT_LANGUAGE: DEFAULT_LANGUAGE
+        DEFAULT_LANGUAGE: DEFAULT_LANGUAGE,
       });
     } else {
       optionData = Options(headers: {
@@ -92,7 +97,7 @@ class DioFactory {
         ACCEPT: APPLICATION_JSON,
         AUTHORIZATION:
             'Bearer ${shapref.userSessionData.token?.token.toString() ?? ""}',
-        DEFAULT_LANGUAGE: DEFAULT_LANGUAGE
+        DEFAULT_LANGUAGE: DEFAULT_LANGUAGE,
       });
     }
 

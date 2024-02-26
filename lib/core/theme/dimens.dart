@@ -520,6 +520,12 @@ class CarroBorderRadius {
   /// Border Radius . Circular, 8.0 dp
   static const circular_8 = BorderRadius.all(Radius.circular(8.0));
 
+  /// Border Radius . Circular, 10.0 dp
+  static const circular_10 = BorderRadius.all(Radius.circular(10.0));
+
+  /// Border Radius . Circular, 12.0 dp
+  static const circular_12 = BorderRadius.all(Radius.circular(12.0));
+
   /// Border Radius . Circular, 50.0 dp
   static const circular_50 = BorderRadius.all(Radius.circular(50.0));
 }

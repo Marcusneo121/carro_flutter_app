@@ -44,7 +44,7 @@ class RegisterTopBarWidget extends StatelessWidget {
           const SizedBox(width: Dimensions.dp_8),
           Text(
             titleAppBar,
-            style: CarroTextStyles.medium_title_bold.copyWith(
+            style: CarroTextStyles.small_title_bold.copyWith(
               color: CarroColors.getColor(
                 context,
                 CarroColors.iconColor,

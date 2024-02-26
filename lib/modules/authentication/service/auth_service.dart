@@ -33,7 +33,7 @@ class AuthService {
           "state": data.state,
           "age": data.age,
           "phone_number": data.phoneNumber,
-          "date_of_birth": data.dateOfBirth?.toIso8601String(),
+          "date_of_birth": data.dateOfBirth?.toUtc().toIso8601String(),
           "profile_image": data.profileImage ?? "-"
         },
         // queryParameters: {

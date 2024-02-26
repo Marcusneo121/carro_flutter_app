@@ -59,6 +59,10 @@ class CarroColors {
   static const fail = Color(0xFFFF333A);
   static const failDark = Color.fromARGB(255, 198, 35, 41);
 
+  static const primayColor = Color(0xFF7620FF);
+
+  // static const primayColorLight = Color.fromARGB(255, 169, 116, 255);
+
   /// Dark Theme Color Map
   static final Map<Color, Color> _darkColor = {
     CarroColors.black_1: CarroColors.black_1,
@@ -71,6 +75,7 @@ class CarroColors {
     CarroColors.textInputColor: CarroColors.textInputColorDark,
     CarroColors.registerHeadlineColor: CarroColors.registerHeadlineColorDark,
     CarroColors.fail: CarroColors.failDark,
+    // CarroColors.primayColorLight: CarroColors.primayColorDark,
   };
 
   static bool isDarkTheme(BuildContext context) {

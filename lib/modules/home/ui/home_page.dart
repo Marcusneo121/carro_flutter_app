@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carro_flutter_app/core/provider/view_model/theme_provider.dart';
+import 'package:carro_flutter_app/core/route/route_index.dart';
+import 'package:carro_flutter_app/core/route/route_manager.dart';
 import 'package:carro_flutter_app/core/theme/colors.dart';
 import 'package:carro_flutter_app/core/theme/dimens.dart';
 import 'package:carro_flutter_app/core/theme/styles.dart';
@@ -14,6 +16,7 @@ import 'package:carro_flutter_app/modules/settings/view_model/settings_model.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:provider/provider.dart';
+import 'package:carro_flutter_app/main.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -31,7 +34,8 @@ class _HomepageState extends State<Homepage> {
           children: [
             HomeTopWidget(
               buttonOne: () {
-                print(SharedPrefs().userSessionData.token?.token.toString());
+                locator<CarroRouter>().navigateTo(CarRoute.addCar);
+                // print(SharedPrefs().userSessionData.token?.token.toString());
               },
               buttonTwo: () {},
               buttonThree: () {},

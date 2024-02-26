@@ -5,6 +5,7 @@ import 'package:carro_flutter_app/core/theme/styles.dart';
 import 'package:carro_flutter_app/modules/home/entity/car.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class HomeCarListItem extends StatelessWidget {
@@ -129,6 +130,7 @@ class HomeCarListItem extends StatelessWidget {
                 ),
               ],
             ),
+            Text(DateTime.parse(carItem.availableFromDate ?? "").toString())
           ],
         ),
       ),
