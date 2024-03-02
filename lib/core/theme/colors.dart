@@ -63,6 +63,11 @@ class CarroColors {
 
   // static const primayColorLight = Color.fromARGB(255, 169, 116, 255);
 
+  static const carViewListItemBackgroundColor =
+      Color.fromARGB(255, 249, 248, 248);
+  static const carViewListItemBackgroundColorDark =
+      Color.fromARGB(255, 42, 35, 58);
+
   /// Dark Theme Color Map
   static final Map<Color, Color> _darkColor = {
     CarroColors.black_1: CarroColors.black_1,
@@ -76,6 +81,8 @@ class CarroColors {
     CarroColors.registerHeadlineColor: CarroColors.registerHeadlineColorDark,
     CarroColors.fail: CarroColors.failDark,
     // CarroColors.primayColorLight: CarroColors.primayColorDark,
+    CarroColors.carViewListItemBackgroundColor:
+        CarroColors.carViewListItemBackgroundColorDark,
   };
 
   static bool isDarkTheme(BuildContext context) {

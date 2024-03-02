@@ -42,7 +42,7 @@ class _AddCarSuccessfulPageState extends State<AddCarSuccessfulPage> {
                   FocusScope.of(context).unfocus();
                   locator<CarroRouter>()
                       .navigateToAndRemoveUntil(CommonRoute.homePage);
-                  context.read<ThemeProvider>().setSelectedIndex(2);
+                  context.read<ThemeProvider>().setSelectedIndex(3);
                 },
               ),
             );

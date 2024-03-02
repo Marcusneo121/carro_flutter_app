@@ -23,4 +23,6 @@ class CarRoute {
   static const String addCar4 = 'addCarPage4';
   static const String addCarConfirmationPage = 'addCarConfirmationPage';
   static const String addCarSuccessfulPage = 'addCarSuccessfulPage';
+
+  static const String viewCarPage = 'viewCarPage';
 }

@@ -130,7 +130,6 @@ class HomeCarListItem extends StatelessWidget {
                 ),
               ],
             ),
-            Text(DateTime.parse(carItem.availableFromDate ?? "").toString())
           ],
         ),
       ),

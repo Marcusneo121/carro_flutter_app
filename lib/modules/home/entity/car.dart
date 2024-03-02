@@ -16,6 +16,7 @@ class Car {
   String? price;
   String? availableToDate;
   String? availableFromDate;
+  bool? isElectric;
   String? createdAt;
   String? updatedAt;
 
@@ -37,6 +38,7 @@ class Car {
       this.price,
       this.availableToDate,
       this.availableFromDate,
+      this.isElectric,
       this.createdAt,
       this.updatedAt});
 
@@ -58,6 +60,7 @@ class Car {
     price = json['price'];
     availableToDate = json['available_to_date'];
     availableFromDate = json['available_from_date'];
+    isElectric = json['is_electric'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -81,6 +84,7 @@ class Car {
     data['price'] = price;
     data['available_to_date'] = availableToDate;
     data['available_from_date'] = availableFromDate;
+    data['is_electric'] = isElectric;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     return data;

@@ -1,6 +1,7 @@
 import 'package:carro_flutter_app/core/network/api.dart';
 import 'package:carro_flutter_app/modules/authentication/register/entity/normal_api_response.dart';
 import 'package:carro_flutter_app/modules/cars/add_car/entity/add_car.dart';
+import 'package:carro_flutter_app/modules/cars/view_car/entity/host.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:intl/intl.dart';
@@ -48,6 +49,20 @@ class CarService {
       );
 
       return NormalApiResponse.fromJson(response.data);
+    } on DioException catch (e) {
+      DioErrorHelper().showDialog(e);
+    } catch (e) {
+      EasyLoading.showError('Error, please try again');
+    }
+  }
+
+  static Future<Host?> getOwnerDetails(int id) async {
+    try {
+      Response<dynamic> response = await dio.get(
+        url: '/user/$id',
+      );
+
+      return Host.fromJson(response.data);
     } on DioException catch (e) {
       DioErrorHelper().showDialog(e);
     } catch (e) {

@@ -1,6 +1,8 @@
 import 'package:animations/animations.dart';
 import 'package:carro_flutter_app/core/provider/view_model/theme_provider.dart';
+import 'package:carro_flutter_app/modules/bookings/ui/bookings_page.dart';
 import 'package:carro_flutter_app/modules/home/ui/home_page.dart';
+import 'package:carro_flutter_app/modules/host/ui/host_page.dart';
 import 'package:carro_flutter_app/modules/settings/ui/settings_page.dart';
 import 'package:carro_flutter_app/modules/testing_text.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +30,9 @@ class _MainSkeletonState extends State<MainSkeleton> {
 
   static const List<Widget> _pages = <Widget>[
     Homepage(),
-    TestingTextSize(),
+    // TestingTextSize(),
+    BookingsPage(),
+    HostPage(),
     SettingsPage(),
   ];
 
@@ -71,9 +75,17 @@ class _MainSkeletonState extends State<MainSkeleton> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.text_format),
-            label: 'Text',
+            icon: Icon(Icons.library_books_rounded),
+            label: 'Bookings',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.car_rental_rounded),
+            label: 'Host',
+          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.text_format),
+          //   label: 'Text',
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_2_rounded),
             label: 'Me',

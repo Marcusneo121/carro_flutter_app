@@ -41,7 +41,7 @@ class _ImagePickerSquareWidgetState extends State<ImagePickerSquareWidget> {
                     borderRadius: CarroBorderRadius.circular_10,
                     child: Image.file(
                       File(widget.imageFile?.path ?? ""),
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                       width: Dimensions.dp_50,
                       height: Dimensions.dp_50,
                     ),

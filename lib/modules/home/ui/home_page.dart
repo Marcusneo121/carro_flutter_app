@@ -6,6 +6,7 @@ import 'package:carro_flutter_app/core/theme/colors.dart';
 import 'package:carro_flutter_app/core/theme/dimens.dart';
 import 'package:carro_flutter_app/core/theme/styles.dart';
 import 'package:carro_flutter_app/core/utils/shared_prefs.dart';
+import 'package:carro_flutter_app/modules/cars/view_car/ui/view_car_page.dart';
 import 'package:carro_flutter_app/modules/home/entity/car.dart';
 import 'package:carro_flutter_app/modules/home/ui/widgets/home_car_list_item.dart';
 import 'package:carro_flutter_app/modules/home/ui/widgets/home_top_widget.dart';
@@ -63,7 +64,15 @@ class _HomepageState extends State<Homepage> {
                             itemBuilder: (context, position) {
                               Car carItem = homeModel.cars[position];
                               return HomeCarListItem(
-                                  onTap: () {}, carItem: carItem);
+                                  onTap: () {
+                                    locator<CarroRouter>().navigateToWithArgs(
+                                      CarRoute.viewCarPage,
+                                      ViewCarPageArgs(
+                                        carData: carItem,
+                                      ),
+                                    );
+                                  },
+                                  carItem: carItem);
                             },
                           )
                         : const Center(

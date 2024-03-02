@@ -369,7 +369,7 @@ class _AddCarConfirmationPageState extends State<AddCarConfirmationPage> {
                                       File(addCarModel
                                               .carToAdd.carMainPic?.path ??
                                           ""),
-                                      fit: BoxFit.fill,
+                                      fit: BoxFit.cover,
                                       width: Dimensions.dp_200,
                                       height: Dimensions.dp_130,
                                     ),
@@ -383,7 +383,7 @@ class _AddCarConfirmationPageState extends State<AddCarConfirmationPage> {
                                       File(addCarModel
                                               .carToAdd.carImageOne?.path ??
                                           ""),
-                                      fit: BoxFit.fill,
+                                      fit: BoxFit.cover,
                                       width: Dimensions.dp_200,
                                       height: Dimensions.dp_130,
                                     ),
@@ -397,7 +397,7 @@ class _AddCarConfirmationPageState extends State<AddCarConfirmationPage> {
                                       File(addCarModel
                                               .carToAdd.carImageTwo?.path ??
                                           ""),
-                                      fit: BoxFit.fill,
+                                      fit: BoxFit.cover,
                                       width: Dimensions.dp_200,
                                       height: Dimensions.dp_130,
                                     ),
@@ -441,7 +441,7 @@ class _AddCarConfirmationPageState extends State<AddCarConfirmationPage> {
                                       File(addCarModel
                                               .carToAdd.carImageThree?.path ??
                                           ""),
-                                      fit: BoxFit.fill,
+                                      fit: BoxFit.cover,
                                       width: Dimensions.dp_200,
                                       height: Dimensions.dp_130,
                                     ),
@@ -455,7 +455,7 @@ class _AddCarConfirmationPageState extends State<AddCarConfirmationPage> {
                                       File(addCarModel
                                               .carToAdd.carImageFour?.path ??
                                           ""),
-                                      fit: BoxFit.fill,
+                                      fit: BoxFit.cover,
                                       width: Dimensions.dp_200,
                                       height: Dimensions.dp_130,
                                     ),

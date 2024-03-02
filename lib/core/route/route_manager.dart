@@ -16,6 +16,7 @@ import 'package:carro_flutter_app/modules/cars/add_car/ui/add_car_page.dart';
 import 'package:carro_flutter_app/modules/cars/add_car/ui/add_car_second_page.dart';
 import 'package:carro_flutter_app/modules/cars/add_car/ui/add_car_successful_page.dart';
 import 'package:carro_flutter_app/modules/cars/add_car/ui/add_car_third_page.dart';
+import 'package:carro_flutter_app/modules/cars/view_car/ui/view_car_page.dart';
 import 'package:carro_flutter_app/modules/common/main_skeleton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ class CarroRouter {
     return navigatoryKey.currentState!.pushNamed(routeName);
   }
 
-  Future<void> navigateToWithArgs(String routeName, String args) {
+  Future<void> navigateToWithArgs(String routeName, Object? args) {
     return navigatoryKey.currentState!.pushNamed(routeName, arguments: args);
   }
 
@@ -98,6 +99,10 @@ class CarroRouter {
       case CarRoute.addCarSuccessfulPage:
         return getPageRouteFadeTransitionBuilder(
             settings, const AddCarSuccessfulPage());
+      case CarRoute.viewCarPage:
+        return CupertinoPageRoute(
+            builder: (_) =>
+                ViewCarPage(args: settings.arguments as ViewCarPageArgs));
       // case CommonRoute.textPage:s
       //   return MaterialPageRoute(
       //       builder: (_) => MainSkeleton(selectedTabIndex: 1));
