@@ -37,7 +37,7 @@ Future main() async {
       providers: [
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
         ChangeNotifierProvider(create: (context) => SettingsProvider()),
-        ChangeNotifierProvider(create: (context) => HomeProvider()),
+        // ChangeNotifierProvider(create: (context) => HomeProvider()),
         ChangeNotifierProvider(create: (context) => RegisterProvider()),
         ChangeNotifierProvider(create: (context) => AddCarProvider()),
       ],

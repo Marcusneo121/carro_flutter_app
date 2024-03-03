@@ -6,7 +6,12 @@ import 'package:flutter/material.dart';
 
 class ViewCarModel extends ViewStateModel {
   late Car _carData;
-  late Host _ownerData;
+  Host? _ownerData;
+  List<String> _imageList = [];
+
+  Host? get getOwnerData => _ownerData;
+  List<String> get getImageList => _imageList;
+
   ViewCarModel({required Car car}) {
     //call api here initializ
     _carData = car;
@@ -18,6 +23,14 @@ class ViewCarModel extends ViewStateModel {
   init() async {
     setBusy();
     try {
+      _imageList = [
+        _carData.carMainPic ?? "-",
+        _carData.carImageOne ?? "-",
+        _carData.carImageTwo ?? "-",
+        _carData.carImageThree ?? "-",
+        _carData.carImageFour ?? "-",
+      ];
+
       List response = await Future.wait([
         CarService.getOwnerDetails(_carData.userId ?? -1),
       ]);

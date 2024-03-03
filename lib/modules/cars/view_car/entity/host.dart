@@ -28,7 +28,7 @@ class Data {
   String? address2;
   String? address3;
   String? phoneNumber;
-  Null? profileImage;
+  String? profileImage;
   String? poscode;
   String? city;
   String? state;

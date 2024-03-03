@@ -1,5 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:carro_flutter_app/core/provider/view_model/theme_provider.dart';
+import 'package:carro_flutter_app/core/widget/fade_indexed_stack.dart';
 import 'package:carro_flutter_app/modules/bookings/ui/bookings_page.dart';
 import 'package:carro_flutter_app/modules/home/ui/home_page.dart';
 import 'package:carro_flutter_app/modules/host/ui/host_page.dart';
@@ -42,21 +43,31 @@ class _MainSkeletonState extends State<MainSkeleton> {
       // body: Center(
       //   child: _pages.elementAt(_selectedIndex), //New
       // ),
-      body: PageTransitionSwitcher(
-        transitionBuilder: ((child, primaryAnimation, secondaryAnimation) {
-          // return FadeScaleTransition(
-          //   animation: primaryAnimation,
-          //   child: child,
-          // );
-          return FadeThroughTransition(
-            animation: primaryAnimation,
-            secondaryAnimation: secondaryAnimation,
-            child: child,
-          );
-        }),
-        child: _pages.elementAt(
-          Provider.of<ThemeProvider>(context).getSelectedIndex,
-        ),
+      //Page Transition Switcher is great, but no state retain after tab change
+      // body: PageTransitionSwitcher(
+      //   transitionBuilder: ((child, primaryAnimation, secondaryAnimation) {
+      //     // return FadeScaleTransition(
+      //     //   animation: primaryAnimation,
+      //     //   child: child,
+      //     // );
+      //     return FadeThroughTransition(
+      //       animation: primaryAnimation,
+      //       secondaryAnimation: secondaryAnimation,
+      //       child: child,
+      //     );
+      //   }),
+      //   child: _pages.elementAt(
+      //     Provider.of<ThemeProvider>(context).getSelectedIndex,
+      //   ),
+      // ),
+      // body: IndexedStack(
+      //   index: Provider.of<ThemeProvider>(context).getSelectedIndex,
+      //   children: _pages,
+      // ),
+      body: FadeIndexedStack(
+        index: Provider.of<ThemeProvider>(context).getSelectedIndex,
+        duration: const Duration(milliseconds: 200),
+        children: _pages,
       ),
       bottomNavigationBar: BottomNavigationBar(
         // currentIndex: _selectedIndex,

@@ -26,63 +26,79 @@ class Homepage extends StatefulWidget {
   State<Homepage> createState() => _HomepageState();
 }
 
-class _HomepageState extends State<Homepage> {
+class _HomepageState extends State<Homepage>
+    with AutomaticKeepAliveClientMixin<Homepage> {
+  HomeProvider? model;
+
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+  void initState() {
+    super.initState();
+    model = HomeProvider();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          children: [
-            HomeTopWidget(
-              buttonOne: () {
-                locator<CarroRouter>().navigateTo(CarRoute.addCar);
-                // print(SharedPrefs().userSessionData.token?.token.toString());
-              },
-              buttonTwo: () {},
-              buttonThree: () {},
-            ),
-            Consumer<HomeProvider>(
-              builder: (context, homeModel, child) {
-                if (homeModel.isBusy) {
-                  return const Expanded(
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
-                } else if (homeModel.isError) {
-                  return const Expanded(
-                    child: Center(
-                      child: Text("Something went wrong"),
-                    ),
-                  );
-                } else {
-                  return Expanded(
-                    child: homeModel.cars.isNotEmpty
-                        ? ListView.builder(
-                            itemCount: homeModel.cars.length,
-                            physics: const AlwaysScrollableScrollPhysics(),
-                            itemBuilder: (context, position) {
-                              Car carItem = homeModel.cars[position];
-                              return HomeCarListItem(
-                                  onTap: () {
-                                    locator<CarroRouter>().navigateToWithArgs(
-                                      CarRoute.viewCarPage,
-                                      ViewCarPageArgs(
-                                        carData: carItem,
-                                      ),
-                                    );
-                                  },
-                                  carItem: carItem);
-                            },
-                          )
-                        : const Center(
-                            child: Text("No data"),
-                          ),
-                  );
-                }
-              },
-            ),
-          ],
+    super.build(context);
+    return ChangeNotifierProvider(
+      create: (context) => model,
+      child: SafeArea(
+        child: Scaffold(
+          body: Column(
+            children: [
+              HomeTopWidget(
+                buttonOne: () {
+                  locator<CarroRouter>().navigateTo(CarRoute.addCar);
+                  // print(SharedPrefs().userSessionData.token?.token.toString());
+                },
+                buttonTwo: () {},
+                buttonThree: () {},
+              ),
+              Consumer<HomeProvider>(
+                builder: (context, homeModel, child) {
+                  if (homeModel.isBusy) {
+                    return const Expanded(
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  } else if (homeModel.isError) {
+                    return const Expanded(
+                      child: Center(
+                        child: Text("Something went wrong"),
+                      ),
+                    );
+                  } else {
+                    return Expanded(
+                      child: homeModel.cars.isNotEmpty
+                          ? ListView.builder(
+                              itemCount: homeModel.cars.length,
+                              physics: const AlwaysScrollableScrollPhysics(),
+                              itemBuilder: (context, position) {
+                                Car carItem = homeModel.cars[position];
+                                return HomeCarListItem(
+                                    onTap: () {
+                                      locator<CarroRouter>().navigateToWithArgs(
+                                        CarRoute.viewCarPage,
+                                        ViewCarPageArgs(
+                                          carData: carItem,
+                                        ),
+                                      );
+                                    },
+                                    carItem: carItem);
+                              },
+                            )
+                          : const Center(
+                              child: Text("No data"),
+                            ),
+                    );
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
