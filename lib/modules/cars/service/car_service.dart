@@ -69,4 +69,25 @@ class CarService {
       EasyLoading.showError('Error, please try again');
     }
   }
+
+  static Future<NormalApiResponse?> bookCar(int carID, String bargainAmount,
+      DateTime rentFrom, DateTime rentTo) async {
+    try {
+      Response<dynamic> response = await dio.post(
+        url: '/rent/booking',
+        data: {
+          "car_id": carID.toInt(),
+          "bargain_amount": bargainAmount.toString(),
+          "rent_from_date":
+              DateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(rentFrom),
+          "rent_to_date": DateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(rentTo),
+        },
+      );
+      return NormalApiResponse.fromJson(response.data);
+    } on DioException catch (e) {
+      DioErrorHelper().showDialog(e);
+    } catch (e) {
+      EasyLoading.showError('Error, please try again');
+    }
+  }
 }

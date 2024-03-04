@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carro_flutter_app/core/route/route_index.dart';
 import 'package:carro_flutter_app/core/route/route_manager.dart';
 import 'package:carro_flutter_app/core/theme/colors.dart';
 import 'package:carro_flutter_app/core/theme/dimens.dart';
@@ -7,6 +8,7 @@ import 'package:carro_flutter_app/core/theme/styles.dart';
 import 'package:carro_flutter_app/core/widget/rounded_button.dart';
 import 'package:carro_flutter_app/main.dart';
 import 'package:carro_flutter_app/modules/authentication/register/ui/widgets/register_top_bar_widget.dart';
+import 'package:carro_flutter_app/modules/cars/view_car/ui/book_car_page.dart';
 import 'package:carro_flutter_app/modules/home/entity/car.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -44,84 +46,99 @@ class _ViewCarPageState extends State<ViewCarPage> {
       child: Scaffold(
         bottomNavigationBar: Consumer<ViewCarModel>(
           builder: (context, viewCarModel, child) {
-            return Container(
-              // padding: const EdgeInsets.symmetric(
-              //     vertical: Dimensions.dp_15, horizontal: Dimensions.dp_30),
-              margin: const EdgeInsets.only(
-                left: Dimensions.dp_30,
-                right: Dimensions.dp_30,
-                bottom: Dimensions.dp_40,
-                top: Dimensions.dp_10,
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: Dimensions.dp_60 + Dimensions.dp_5,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "RM ${widget.args.carData.price ?? "-"}",
-                          style: CarroTextStyles.large_title_bold,
-                        ),
-                        Text(
-                          "per day",
-                          style: CarroTextStyles.normal_text.copyWith(
-                            color: CarroColors.getColor(
-                              context,
-                              CarroColors.textInputColor,
+            if (viewCarModel.isBusy) {
+              return const SizedBox.shrink();
+            } else if (viewCarModel.isError) {
+              return const SizedBox.shrink();
+            } else if (viewCarModel.isIdle) {
+              return Container(
+                // padding: const EdgeInsets.symmetric(
+                //     vertical: Dimensions.dp_15, horizontal: Dimensions.dp_30),
+                margin: const EdgeInsets.only(
+                  left: Dimensions.dp_30,
+                  right: Dimensions.dp_30,
+                  bottom: Dimensions.dp_40,
+                  top: Dimensions.dp_10,
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: Dimensions.dp_60 + Dimensions.dp_5,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "RM ${widget.args.carData.price ?? "-"}",
+                            style: CarroTextStyles.large_title_bold,
+                          ),
+                          Text(
+                            "per day",
+                            style: CarroTextStyles.normal_text.copyWith(
+                              color: CarroColors.getColor(
+                                context,
+                                CarroColors.textInputColor,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            "* Insurance included",
+                            style: CarroTextStyles.medium_item_text.copyWith(
+                              fontStyle: FontStyle.italic,
+                              color: CarroColors.getColor(
+                                context,
+                                CarroColors.textInputColor,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Spacer(),
+                    SizedBox(
+                      height: Dimensions.dp_60,
+                      width: Dimensions.dp_184,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          FocusScope.of(context).unfocus();
+                          // Navigator.pushNamed(context, CarRoute.bookCarPage,
+                          //     arguments:
+                          //         BookCarPageArgs(viewCarModel: viewCarModel));
+                          locator<CarroRouter>().navigateToWithArgs(
+                              CarRoute.bookCarPage,
+                              BookCarPageArgs(viewCarModel: viewCarModel));
+                          setState(() {});
+                        },
+                        style: ButtonStyle(
+                          foregroundColor: MaterialStateProperty.all<Color>(
+                            CarroColors.getColor(
+                                context, CarroColors.iconColor),
+                          ),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                            CarroColors.getColor(
+                                context, CarroColors.list_item_color),
+                          ),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.dp_12),
+                              //side: const BorderSide(color: Colors.red),
                             ),
                           ),
                         ),
-                        Text(
-                          "* Insurance included",
-                          style: CarroTextStyles.medium_item_text.copyWith(
-                            fontStyle: FontStyle.italic,
-                            color: CarroColors.getColor(
-                              context,
-                              CarroColors.textInputColor,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Spacer(),
-                  SizedBox(
-                    height: Dimensions.dp_60,
-                    width: Dimensions.dp_184,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        FocusScope.of(context).unfocus();
-                        setState(() {});
-                      },
-                      style: ButtonStyle(
-                        foregroundColor: MaterialStateProperty.all<Color>(
-                          CarroColors.getColor(context, CarroColors.iconColor),
-                        ),
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                          CarroColors.getColor(
-                              context, CarroColors.list_item_color),
-                        ),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(Dimensions.dp_12),
-                            //side: const BorderSide(color: Colors.red),
-                          ),
+                        child: const Text(
+                          "Book now",
+                          style: CarroTextStyles.medium_label_bold,
                         ),
                       ),
-                      child: const Text(
-                        "Book now",
-                        style: CarroTextStyles.medium_label_bold,
-                      ),
                     ),
-                  ),
-                ],
-              ),
-            );
+                  ],
+                ),
+              );
+            } else {
+              return const SizedBox.shrink();
+            }
           },
         ),
         body: SafeArea(
@@ -172,7 +189,7 @@ class _ViewCarPageState extends State<ViewCarPage> {
                               options: CarouselOptions(
                                 autoPlay: true,
                                 enableInfiniteScroll: false,
-                                aspectRatio: 16 / 9,
+                                aspectRatio: 16 / 8,
                                 viewportFraction: 1.0,
                                 initialPage: 0,
                                 enlargeCenterPage: false,

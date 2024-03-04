@@ -25,4 +25,16 @@ class CarRoute {
   static const String addCarSuccessfulPage = 'addCarSuccessfulPage';
 
   static const String viewCarPage = 'viewCarPage';
+  static const String bookCarPage = 'bookCarPage';
+  static const String bookSuccessfulPage = 'bookSuccessfulPage';
+}
+
+class BookingRoute {
+  static const String module = "booking/";
+  static const String viewBookingPage = 'viewBookingPage';
+}
+
+class HostingRoute {
+  static const String module = "hosting/";
+  static const String viewHostingPage = 'viewHostingPage';
 }

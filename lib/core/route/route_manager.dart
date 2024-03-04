@@ -10,14 +10,18 @@ import 'package:carro_flutter_app/modules/authentication/register/ui/register_pa
 import 'package:carro_flutter_app/modules/authentication/register/ui/register_phone_number.dart';
 import 'package:carro_flutter_app/modules/authentication/register/ui/register_successful_page.dart';
 import 'package:carro_flutter_app/modules/authentication/register/ui/register_username_email_page.dart';
+import 'package:carro_flutter_app/modules/bookings/ui/view_booking_page.dart';
 import 'package:carro_flutter_app/modules/cars/add_car/ui/add_car_confirmation_page.dart';
 import 'package:carro_flutter_app/modules/cars/add_car/ui/add_car_fourth_page.dart';
 import 'package:carro_flutter_app/modules/cars/add_car/ui/add_car_page.dart';
 import 'package:carro_flutter_app/modules/cars/add_car/ui/add_car_second_page.dart';
 import 'package:carro_flutter_app/modules/cars/add_car/ui/add_car_successful_page.dart';
 import 'package:carro_flutter_app/modules/cars/add_car/ui/add_car_third_page.dart';
+import 'package:carro_flutter_app/modules/cars/view_car/ui/book_car_page.dart';
+import 'package:carro_flutter_app/modules/cars/view_car/ui/book_successful_page.dart';
 import 'package:carro_flutter_app/modules/cars/view_car/ui/view_car_page.dart';
 import 'package:carro_flutter_app/modules/common/main_skeleton.dart';
+import 'package:carro_flutter_app/modules/host/ui/view_hosting_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -85,6 +89,7 @@ class CarroRouter {
       case CommonRoute.registerSuccessfulPage:
         return getPageRouteFadeTransitionBuilder(
             settings, const RegisterSuccessfulPage());
+
       case CarRoute.addCar:
         return CupertinoPageRoute(builder: (_) => const AddCarPage());
       case CarRoute.addCar2:
@@ -103,6 +108,22 @@ class CarroRouter {
         return CupertinoPageRoute(
             builder: (_) =>
                 ViewCarPage(args: settings.arguments as ViewCarPageArgs));
+      case CarRoute.bookCarPage:
+        return CupertinoPageRoute(
+            builder: (_) =>
+                BookCarPage(args: settings.arguments as BookCarPageArgs));
+      case CarRoute.bookSuccessfulPage:
+        return CupertinoPageRoute(builder: (_) => const BookSuccessfulPage());
+
+      case BookingRoute.viewBookingPage:
+        return CupertinoPageRoute(
+            builder: (_) => ViewBookingPage(
+                args: settings.arguments as ViewBookingPageArgs));
+
+      case HostingRoute.viewHostingPage:
+        return CupertinoPageRoute(
+            builder: (_) => ViewHostingPage(
+                args: settings.arguments as ViewHostingPageArgs));
       // case CommonRoute.textPage:s
       //   return MaterialPageRoute(
       //       builder: (_) => MainSkeleton(selectedTabIndex: 1));

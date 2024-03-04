@@ -61,6 +61,9 @@ class CarroColors {
 
   static const primayColor = Color(0xFF7620FF);
 
+  static const primaryContainer = Color(0xFFF1F1F1);
+  static const primaryContainerDark = Color(0xFF0C0120);
+
   // static const primayColorLight = Color.fromARGB(255, 169, 116, 255);
 
   static const carViewListItemBackgroundColor =
@@ -83,6 +86,7 @@ class CarroColors {
     // CarroColors.primayColorLight: CarroColors.primayColorDark,
     CarroColors.carViewListItemBackgroundColor:
         CarroColors.carViewListItemBackgroundColorDark,
+    // CarroColors.primaryContainer: CarroColors.primaryContainerDark,
   };
 
   static bool isDarkTheme(BuildContext context) {
