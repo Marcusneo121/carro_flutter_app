@@ -24,18 +24,22 @@ class Data {
   String? ephemeralKey;
   String? customer;
   String? publishableKey;
+  int? paymentTransactionId;
 
-  Data(
-      {this.paymentIntent,
-      this.ephemeralKey,
-      this.customer,
-      this.publishableKey});
+  Data({
+    this.paymentIntent,
+    this.ephemeralKey,
+    this.customer,
+    this.publishableKey,
+    this.paymentTransactionId,
+  });
 
   Data.fromJson(Map<String, dynamic> json) {
     paymentIntent = json['paymentIntent'];
     ephemeralKey = json['ephemeralKey'];
     customer = json['customer'];
     publishableKey = json['publishableKey'];
+    paymentTransactionId = json['payment_transaction_id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -44,6 +48,7 @@ class Data {
     data['ephemeralKey'] = ephemeralKey;
     data['customer'] = customer;
     data['publishableKey'] = publishableKey;
+    data['payment_transaction_id'] = paymentTransactionId;
     return data;
   }
 }

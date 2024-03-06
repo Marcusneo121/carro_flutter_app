@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:carro_flutter_app/core/network/api.dart';
 import 'package:carro_flutter_app/modules/authentication/register/entity/normal_api_response.dart';
 import 'package:carro_flutter_app/modules/bookings/entity/booking.dart';
+import 'package:carro_flutter_app/modules/bookings/entity/confrim_payment.dart';
 import 'package:carro_flutter_app/modules/bookings/entity/make_payment_intent.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -65,21 +66,49 @@ class BookingService {
     required int bargainID,
     required int rentalTansactionId,
   }) async {
-    try {
+    // try {
+    Response<dynamic> response = await dio.post(
+      url: '/payment/make-payment-intent',
+      data: {
+        "total_amount": totalAmount.toString(),
+        "bargain_id": bargainID.toInt(),
+        "rental_transaction_id": rentalTansactionId.toInt()
+      },
+    );
+    return MakePaymentIntent.fromJson(response.data);
+    // } on DioException catch (e) {
+    //   DioErrorHelper().showDialog(e);
+    // } catch (e) {
+    //   EasyLoading.showError('Error, please try again');
+    // }
+  }
+
+  static Future<ConfirmPayment?> confirmPayment({
+    required int paymentTransactionId,
+    required int bargainID,
+    required int rentalTansactionId,
+    required String stripeCustomerId,
+  }) async {
+    // try {
+    if (paymentTransactionId == -1) {
+      EasyLoading.showError('Error, please try again');
+    } else {
       Response<dynamic> response = await dio.post(
-        url: '/payment/make-payment-intent',
+        url: '/payment/confirm-payment',
         data: {
-          "total_amount": totalAmount.toString(),
+          "payment_transaction_id": paymentTransactionId.toString(),
           "bargain_id": bargainID.toInt(),
-          "rental_transaction_id": rentalTansactionId.toInt()
+          "rental_transaction_id": rentalTansactionId.toInt(),
+          "stripe_customer_id": stripeCustomerId.toString(),
         },
       );
-      return MakePaymentIntent.fromJson(response.data);
-    } on DioException catch (e) {
-      DioErrorHelper().showDialog(e);
-    } catch (e) {
-      EasyLoading.showError('Error, please try again');
+      return ConfirmPayment.fromJson(response.data);
     }
+    // } on DioException catch (e) {
+    //   DioErrorHelper().showDialog(e);
+    // } catch (e) {
+    //   EasyLoading.showError('Error, please try again');
+    // }
   }
 }
 

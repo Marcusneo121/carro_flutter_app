@@ -273,9 +273,13 @@ class _ViewHostingPageState extends State<ViewHostingPage> {
                                               widget.args.hostingData
                                                       .bargainStatusId ==
                                                   4
-                                          ? const StatusBadge(
-                                              badgeID: 6,
-                                              badgeType: "Payment_Pending")
+                                          ? widget.args.hostingData
+                                                      .bargainStatusId ==
+                                                  6
+                                              ? const SizedBox.shrink()
+                                              : const StatusBadge(
+                                                  badgeID: 7,
+                                                  badgeType: "Payment_Pending")
                                           : const SizedBox.shrink(),
                                     ],
                                   ),
@@ -528,7 +532,7 @@ class _ViewHostingPageState extends State<ViewHostingPage> {
                                               child: CarroTextFormField(
                                                 textInputType:
                                                     const TextInputType
-                                                            .numberWithOptions(
+                                                        .numberWithOptions(
                                                         signed: true),
                                                 textInputFormatter: [
                                                   FilteringTextInputFormatter
@@ -585,6 +589,8 @@ class _ViewHostingPageState extends State<ViewHostingPage> {
     } else if (widget.args.hostingData.oriBargainStatusId == 4) {
       return const SizedBox.shrink();
     } else if (widget.args.hostingData.oriBargainStatusId == 5) {
+      return const SizedBox.shrink();
+    } else if (widget.args.hostingData.oriBargainStatusId == 6) {
       return const SizedBox.shrink();
     } else {
       return Row(

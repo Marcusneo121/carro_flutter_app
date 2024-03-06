@@ -146,8 +146,10 @@ class BookingHostListItem extends StatelessWidget {
                 ),
                 bookingHostItem.bargainStatusId == 2 ||
                         bookingHostItem.bargainStatusId == 4
-                    ? const StatusBadge(
-                        badgeID: 6, badgeType: "Payment_Pending")
+                    ? bookingHostItem.bargainStatusId == 6
+                        ? const SizedBox.shrink()
+                        : const StatusBadge(
+                            badgeID: 7, badgeType: "Payment_Pending")
                     : const SizedBox.shrink(),
               ],
             ),

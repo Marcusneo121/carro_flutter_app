@@ -33,6 +33,7 @@ class BookingRoute {
   static const String module = "booking/";
   static const String viewBookingPage = 'viewBookingPage';
   static const String paymentConfirmationPage = 'paymentCofirmationPage';
+  static const String paymentSuccessfulPage = 'paymentSuccesfulPage';
 }
 
 class HostingRoute {

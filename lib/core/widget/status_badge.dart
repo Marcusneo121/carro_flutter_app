@@ -34,7 +34,10 @@ class StatusBadge extends StatelessWidget {
     } else if (badgeID == 5 && badgeType == "Guest_Rejected") {
       badgeName = "Guest Rejected";
       badgeColor = Colors.red;
-    } else if (badgeID == 6 && badgeType == "Payment_Pending") {
+    } else if (badgeID == 6 && badgeType == "Booking_Paid") {
+      badgeName = "Booking Paid";
+      badgeColor = Colors.green;
+    } else if (badgeID == 7 && badgeType == "Payment_Pending") {
       badgeName = "Pending Payment";
       badgeColor = Colors.blue;
     } else if (badgeID == -1 && badgeType == "-") {

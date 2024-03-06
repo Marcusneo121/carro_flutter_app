@@ -6,11 +6,13 @@ import 'package:carro_flutter_app/core/route/route_manager.dart';
 import 'package:carro_flutter_app/main.dart';
 import 'package:carro_flutter_app/modules/authentication/register/entity/normal_api_response.dart';
 import 'package:carro_flutter_app/modules/bookings/entity/booking.dart';
+import 'package:carro_flutter_app/modules/bookings/entity/confrim_payment.dart';
 import 'package:carro_flutter_app/modules/bookings/entity/make_payment_intent.dart';
 import 'package:carro_flutter_app/modules/bookings/service/booking_service.dart';
+import 'package:carro_flutter_app/modules/bookings/ui/payment_successful_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-// import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -22,6 +24,7 @@ class BookingsModel extends ViewStateModel {
   List<String> get getImageList => _imageList;
 
   MakePaymentIntent? makePaymentIntentResponse;
+  ConfirmPayment? confirmPaymentResponse;
 
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
@@ -136,34 +139,52 @@ class BookingsModel extends ViewStateModel {
         final ephemeralKey = makePaymentIntentResponse?.data?.ephemeralKey;
         final customer = makePaymentIntentResponse?.data?.customer;
         final publishableKey = makePaymentIntentResponse?.data?.publishableKey;
+        final paymentTransactionId =
+            makePaymentIntentResponse?.data?.paymentTransactionId;
 
-        // Stripe.publishableKey = publishableKey ?? "-";
-        // await Stripe.instance.initPaymentSheet(
-        //   paymentSheetParameters: SetupPaymentSheetParameters(
-        //     customFlow: false,
-        //     merchantDisplayName: 'CARRO',
-        //     paymentIntentClientSecret: paymentIntent,
-        //     customerEphemeralKeySecret: ephemeralKey,
-        //     customerId: customer,
-        //     style: ThemeMode.light,
-        //   ),
-        // );
+        Stripe.publishableKey = publishableKey ?? "-";
 
-        // EasyLoading.dismiss();
+        await Stripe.instance.initPaymentSheet(
+          paymentSheetParameters: SetupPaymentSheetParameters(
+            customFlow: false,
+            merchantDisplayName: 'CARRO',
+            paymentIntentClientSecret: paymentIntent,
+            customerEphemeralKeySecret: ephemeralKey,
+            customerId: customer,
+            style: ThemeMode.dark,
+          ),
+        );
 
-        // await Stripe.instance.presentPaymentSheet().then((value) {
-        //   print(value);
+        EasyLoading.dismiss();
 
-        //   //Success
-        //   //post API to save Data
-        // }).onError((error, stackTrace) {
-        //   EasyLoading.dismiss();
-        //   if (error is StripeException) {
-        //     EasyLoading.showError('${error.error.localizedMessage}');
-        //   } else {
-        //     EasyLoading.showError('Stripe Error: $error');
-        //   }
-        // });
+        await Stripe.instance.presentPaymentSheet().then((value) async {
+          EasyLoading.show(status: "Processing payment...");
+          confirmPaymentResponse = await BookingService.confirmPayment(
+            paymentTransactionId: paymentTransactionId ?? -1,
+            bargainID: bargainID,
+            rentalTansactionId: rentalTansactionId,
+            stripeCustomerId: customer.toString(),
+          );
+
+          if (confirmPaymentResponse != null) {
+            EasyLoading.dismiss(animation: true);
+            locator<CarroRouter>().navigateToWithArgs(
+              BookingRoute.paymentSuccessfulPage,
+              PaymentSuccesfulPageArgs(
+                  transactionId: confirmPaymentResponse
+                          ?.data?.paymentReferenceId
+                          .toString() ??
+                      "-"),
+            );
+          }
+        }).onError((error, stackTrace) {
+          EasyLoading.dismiss(animation: true);
+          if (error is StripeException) {
+            EasyLoading.showError('${error.error.localizedMessage}');
+          } else {
+            EasyLoading.showError('Stripe Error: $error');
+          }
+        });
       }
     }
   }

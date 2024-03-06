@@ -300,9 +300,13 @@ class _ViewBookingPageState extends State<ViewBookingPage> {
                                               widget.args.bookingData
                                                       .bargainStatusId ==
                                                   4
-                                          ? const StatusBadge(
-                                              badgeID: 6,
-                                              badgeType: "Payment_Pending")
+                                          ? widget.args.bookingData
+                                                      .bargainStatusId ==
+                                                  6
+                                              ? const SizedBox.shrink()
+                                              : const StatusBadge(
+                                                  badgeID: 7,
+                                                  badgeType: "Payment_Pending")
                                           : const SizedBox.shrink(),
                                     ],
                                   ),
@@ -555,7 +559,7 @@ class _ViewBookingPageState extends State<ViewBookingPage> {
                                               child: CarroTextFormField(
                                                 textInputType:
                                                     const TextInputType
-                                                            .numberWithOptions(
+                                                        .numberWithOptions(
                                                         signed: true),
                                                 textInputFormatter: [
                                                   FilteringTextInputFormatter
@@ -756,6 +760,8 @@ class _ViewBookingPageState extends State<ViewBookingPage> {
         ],
       );
     } else if (widget.args.bookingData.oriBargainStatusId == 5) {
+      return const SizedBox.shrink();
+    } else if (widget.args.bookingData.oriBargainStatusId == 6) {
       return const SizedBox.shrink();
     } else {
       return Row(
