@@ -93,52 +93,62 @@ class BookingHostListItem extends StatelessWidget {
             ),
             const SizedBox(height: 5),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  margin: const EdgeInsets.only(right: 10),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(4),
-                    border: Border.all(color: Colors.grey),
-                  ),
-                  child: Text(
-                    bookingHostItem.carPlate.toString(),
-                    style: CarroTextStyles.medium_item_text.copyWith(
-                      color: Colors.grey,
+                Row(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(right: 10),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 2, horizontal: 5),
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(4),
+                        border: Border.all(color: Colors.grey),
+                      ),
+                      child: Text(
+                        bookingHostItem.carPlate.toString(),
+                        style: CarroTextStyles.medium_item_text.copyWith(
+                          color: Colors.grey,
+                        ),
+                        // style: Theme.of(context)
+                        //     .textTheme
+                        //     .bodySmall
+                        //     ?.copyWith(
+                        //       color: Theme.of(context)
+                        //                   .colorScheme
+                        //                   .brightness ==
+                        //               Brightness.dark
+                        //           ? Colors.grey
+                        //           : Colors.grey,
+                        //     ),
+                      ),
                     ),
-                    // style: Theme.of(context)
-                    //     .textTheme
-                    //     .bodySmall
-                    //     ?.copyWith(
-                    //       color: Theme.of(context)
-                    //                   .colorScheme
-                    //                   .brightness ==
-                    //               Brightness.dark
-                    //           ? Colors.grey
-                    //           : Colors.grey,
-                    //     ),
-                  ),
-                ),
-                Text(
-                  "RM ${bookingHostItem.lastBargainAmount.toString()} /day",
-                  style: CarroTextStyles.medium_item_text_bold.copyWith(
-                    color: CarroColors.getColor(
-                      context,
-                      CarroColors.black_8,
+                    Text(
+                      "RM ${bookingHostItem.lastBargainAmount.toString()} /day",
+                      style: CarroTextStyles.medium_item_text_bold.copyWith(
+                        color: CarroColors.getColor(
+                          context,
+                          CarroColors.black_8,
+                        ),
+                      ),
+                      // style: Theme.of(context)
+                      //     .textTheme
+                      //     .labelMedium
+                      //     ?.copyWith(
+                      //       color: CarroColors.getColor(
+                      //         context,
+                      //         CarroColors.black_8,
+                      //       ),
+                      //     ),
                     ),
-                  ),
-                  // style: Theme.of(context)
-                  //     .textTheme
-                  //     .labelMedium
-                  //     ?.copyWith(
-                  //       color: CarroColors.getColor(
-                  //         context,
-                  //         CarroColors.black_8,
-                  //       ),
-                  //     ),
+                  ],
                 ),
+                bookingHostItem.bargainStatusId == 2 ||
+                        bookingHostItem.bargainStatusId == 4
+                    ? const StatusBadge(
+                        badgeID: 6, badgeType: "Payment_Pending")
+                    : const SizedBox.shrink(),
               ],
             ),
             // const SizedBox(height: Dimensions.dp_20),

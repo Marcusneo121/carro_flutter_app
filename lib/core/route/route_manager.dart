@@ -10,6 +10,7 @@ import 'package:carro_flutter_app/modules/authentication/register/ui/register_pa
 import 'package:carro_flutter_app/modules/authentication/register/ui/register_phone_number.dart';
 import 'package:carro_flutter_app/modules/authentication/register/ui/register_successful_page.dart';
 import 'package:carro_flutter_app/modules/authentication/register/ui/register_username_email_page.dart';
+import 'package:carro_flutter_app/modules/bookings/ui/payment_confirmation_page.dart';
 import 'package:carro_flutter_app/modules/bookings/ui/view_booking_page.dart';
 import 'package:carro_flutter_app/modules/cars/add_car/ui/add_car_confirmation_page.dart';
 import 'package:carro_flutter_app/modules/cars/add_car/ui/add_car_fourth_page.dart';
@@ -119,6 +120,10 @@ class CarroRouter {
         return CupertinoPageRoute(
             builder: (_) => ViewBookingPage(
                 args: settings.arguments as ViewBookingPageArgs));
+      case BookingRoute.paymentConfirmationPage:
+        return CupertinoPageRoute(
+            builder: (_) => PaymentConfirmationPage(
+                args: settings.arguments as PaymentConfirmationPageArgs));
 
       case HostingRoute.viewHostingPage:
         return CupertinoPageRoute(

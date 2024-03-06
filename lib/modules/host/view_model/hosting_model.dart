@@ -1,3 +1,4 @@
+import 'package:carro_flutter_app/core/enums/enums.dart';
 import 'package:carro_flutter_app/core/provider/view_model/theme_provider.dart';
 import 'package:carro_flutter_app/core/provider/view_state_model.dart';
 import 'package:carro_flutter_app/core/route/route_index.dart';
@@ -41,6 +42,7 @@ class HostingModel extends ViewStateModel {
       refreshController.refreshCompleted();
       setIdle();
     } catch (e, s) {
+      refreshController.refreshFailed();
       setError(e, s);
     }
   }
@@ -58,6 +60,38 @@ class HostingModel extends ViewStateModel {
       );
       if (carBookingResponse != null) {
         EasyLoading.showSuccess("Your bargaining price is saved.");
+        await init();
+        locator<CarroRouter>().navigateToAndRemoveUntil(CommonRoute.homePage);
+        context.read<ThemeProvider>().setSelectedIndex(2);
+      }
+    } else {
+      EasyLoading.showError(
+        "Something went wrong, please try again.",
+        duration: const Duration(
+          seconds: 3,
+        ),
+      );
+    }
+  }
+
+  acceptRejectBargain(
+      {required int? bargainID,
+      required HostAction hostAction,
+      required BuildContext context}) async {
+    setBusy();
+    EasyLoading.show(dismissOnTap: false);
+    if (bargainID != null) {
+      NormalApiResponse? carHostActionResponse =
+          await HostService.updateBargaining(
+        bargainID, //should be available
+        hostAction == HostAction.accept ? 'accept' : 'reject',
+      );
+      if (carHostActionResponse != null) {
+        if (hostAction == HostAction.accept) {
+          EasyLoading.showSuccess("You had accepted the offer.");
+        } else {
+          EasyLoading.showSuccess("You had rejected the offer.");
+        }
         await init();
         locator<CarroRouter>().navigateToAndRemoveUntil(CommonRoute.homePage);
         context.read<ThemeProvider>().setSelectedIndex(2);

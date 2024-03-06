@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:carro_flutter_app/core/provider/view_model/theme_provider.dart';
-import 'package:carro_flutter_app/core/route/route_index.dart';
+import 'package:carro_flutter_app/core/enums/enums.dart';
 import 'package:carro_flutter_app/core/route/route_manager.dart';
 import 'package:carro_flutter_app/core/theme/colors.dart';
 import 'package:carro_flutter_app/core/theme/dimens.dart';
@@ -13,14 +12,12 @@ import 'package:carro_flutter_app/core/widget/status_badge.dart';
 import 'package:carro_flutter_app/main.dart';
 import 'package:carro_flutter_app/modules/authentication/register/ui/widgets/register_top_bar_widget.dart';
 import 'package:carro_flutter_app/modules/bookings/entity/booking.dart';
-import 'package:carro_flutter_app/modules/bookings/view_model/bookings_model.dart';
 import 'package:carro_flutter_app/modules/host/view_model/hosting_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
 class ViewHostingPageArgs {
   ViewHostingPageArgs({required this.hostingModel, required this.hostingData});
@@ -79,7 +76,7 @@ class _ViewHostingPageState extends State<ViewHostingPage> {
             top: Dimensions.dp_10,
           ),
           child: enableBigSaveButton == false
-              ? acceptRejectButtonDisplay()
+              ? acceptRejectButtonDisplay(context)
               : RoundedButton(
                   buttonText: 'Save',
                   onTap: () async {
@@ -99,7 +96,7 @@ class _ViewHostingPageState extends State<ViewHostingPage> {
                 scrolledUnderElevation: 0.0,
                 leadingWidth: Dimensions.dp_290,
                 leading: RegisterTopBarWidget(
-                  titleAppBar: 'Your booking',
+                  titleAppBar: 'Your host',
                   onTap: () async {
                     FocusScope.of(context).unfocus();
                     if (enableBigSaveButton == true) {
@@ -221,12 +218,14 @@ class _ViewHostingPageState extends State<ViewHostingPage> {
                                 left: Dimensions.dp_5,
                                 right: Dimensions.dp_5,
                               ),
-                              child: Column(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         widget.args.hostingData.carName
@@ -234,6 +233,33 @@ class _ViewHostingPageState extends State<ViewHostingPage> {
                                         style:
                                             CarroTextStyles.medium_title_bold,
                                       ),
+                                      const SizedBox(height: Dimensions.dp_10),
+                                      Container(
+                                        margin:
+                                            const EdgeInsets.only(right: 10),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 2, horizontal: 5),
+                                        decoration: BoxDecoration(
+                                          color: Colors.transparent,
+                                          borderRadius:
+                                              BorderRadius.circular(4),
+                                          border:
+                                              Border.all(color: Colors.grey),
+                                        ),
+                                        child: Text(
+                                          widget.args.hostingData.carPlate
+                                              .toString(),
+                                          style: CarroTextStyles.normal_text
+                                              .copyWith(
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
                                       StatusBadge(
                                           badgeID: widget.args.hostingData
                                                   .bargainStatusId ??
@@ -241,26 +267,17 @@ class _ViewHostingPageState extends State<ViewHostingPage> {
                                           badgeType: widget.args.hostingData
                                                   .oriBargainName ??
                                               "-"),
+                                      const SizedBox(height: Dimensions.dp_10),
+                                      widget.args.hostingData.bargainStatusId ==
+                                                  2 ||
+                                              widget.args.hostingData
+                                                      .bargainStatusId ==
+                                                  4
+                                          ? const StatusBadge(
+                                              badgeID: 6,
+                                              badgeType: "Payment_Pending")
+                                          : const SizedBox.shrink(),
                                     ],
-                                  ),
-                                  const SizedBox(height: Dimensions.dp_10),
-                                  Container(
-                                    margin: const EdgeInsets.only(right: 10),
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 2, horizontal: 5),
-                                    decoration: BoxDecoration(
-                                      color: Colors.transparent,
-                                      borderRadius: BorderRadius.circular(4),
-                                      border: Border.all(color: Colors.grey),
-                                    ),
-                                    child: Text(
-                                      widget.args.hostingData.carPlate
-                                          .toString(),
-                                      style:
-                                          CarroTextStyles.normal_text.copyWith(
-                                        color: Colors.grey,
-                                      ),
-                                    ),
                                   ),
                                 ],
                               ),
@@ -428,19 +445,26 @@ class _ViewHostingPageState extends State<ViewHostingPage> {
                                         style: CarroTextStyles.large_label,
                                       ),
                                       ableToSave == false
-                                          ? InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  ableToSave = !ableToSave;
-                                                });
-                                              },
-                                              child: const Text(
-                                                "Edit",
-                                                style: TextStyle(
-                                                    color: CarroColors
-                                                        .primayColor),
-                                              ),
-                                            )
+                                          ? widget.args.hostingData
+                                                          .oriBargainStatusId ==
+                                                      0 ||
+                                                  widget.args.hostingData
+                                                          .oriBargainStatusId ==
+                                                      1
+                                              ? InkWell(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      ableToSave = !ableToSave;
+                                                    });
+                                                  },
+                                                  child: const Text(
+                                                    "Edit",
+                                                    style: TextStyle(
+                                                        color: CarroColors
+                                                            .primayColor),
+                                                  ),
+                                                )
+                                              : const SizedBox.shrink()
                                           : InkWell(
                                               onTap: () {
                                                 saveButtonPress(
@@ -545,10 +569,22 @@ class _ViewHostingPageState extends State<ViewHostingPage> {
     );
   }
 
-  Widget acceptRejectButtonDisplay() {
-    if (widget.args.hostingData.oriBargainStatusId == 1 &&
+  Widget acceptRejectButtonDisplay(BuildContext context) {
+    if (widget.args.hostingData.oriBargainStatusId == 0 &&
         widget.args.hostingData.lastBargainUser?.toInt() ==
             sharef.userSessionData.data?.user?.id?.toInt()) {
+      return const SizedBox.shrink();
+    } else if (widget.args.hostingData.oriBargainStatusId == 1 &&
+        widget.args.hostingData.lastBargainUser?.toInt() ==
+            sharef.userSessionData.data?.user?.id?.toInt()) {
+      return const SizedBox.shrink();
+    } else if (widget.args.hostingData.oriBargainStatusId == 2) {
+      return const SizedBox.shrink();
+    } else if (widget.args.hostingData.oriBargainStatusId == 3) {
+      return const SizedBox.shrink();
+    } else if (widget.args.hostingData.oriBargainStatusId == 4) {
+      return const SizedBox.shrink();
+    } else if (widget.args.hostingData.oriBargainStatusId == 5) {
       return const SizedBox.shrink();
     } else {
       return Row(
@@ -559,7 +595,13 @@ class _ViewHostingPageState extends State<ViewHostingPage> {
               height: Dimensions.dp_50,
               child: ElevatedButton(
                 onPressed: () {
+                  print(widget.args.hostingData.oriBargainId);
                   FocusScope.of(context).unfocus();
+                  widget.args.hostingModel.acceptRejectBargain(
+                    bargainID: widget.args.hostingData.oriBargainId,
+                    hostAction: HostAction.reject,
+                    context: context,
+                  );
                   // Navigator.pushNamed(context, CarRoute.bookCarPage,
                   //     arguments:
                   //         BookCarPageArgs(viewCarModel: viewCarModel));
@@ -600,6 +642,39 @@ class _ViewHostingPageState extends State<ViewHostingPage> {
               child: ElevatedButton(
                 onPressed: () {
                   FocusScope.of(context).unfocus();
+                  showCupertinoDialog(
+                      context: context,
+                      builder: (_) => CupertinoAlertDialog(
+                            title: const Text("Are you sure?"),
+                            content: Container(
+                              margin:
+                                  const EdgeInsets.only(top: Dimensions.dp_10),
+                              child: Text(
+                                  "You agree with the rent price RM${widget.args.hostingData.lastBargainAmount} from guest."),
+                            ),
+                            actions: [
+                              // Close the dialog
+                              // You can use the CupertinoDialogAction widget instead
+                              CupertinoButton(
+                                  child: const Text('Cancel'),
+                                  onPressed: () {
+                                    locator<CarroRouter>().pop();
+                                  }),
+                              CupertinoButton(
+                                child: const Text('Agree'),
+                                onPressed: () {
+                                  locator<CarroRouter>().pop();
+                                  widget.args.hostingModel.acceptRejectBargain(
+                                    bargainID:
+                                        widget.args.hostingData.oriBargainId,
+                                    hostAction: HostAction.accept,
+                                    context: context,
+                                  );
+                                },
+                              )
+                            ],
+                          ));
+
                   // Navigator.pushNamed(context, CarRoute.bookCarPage,
                   //     arguments:
                   //         BookCarPageArgs(viewCarModel: viewCarModel));

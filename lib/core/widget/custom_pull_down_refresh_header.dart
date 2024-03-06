@@ -34,7 +34,13 @@ class _CarroCustomPullDownRefreshHeaderState
         // } else if (mode == RefreshStatus.failed) {
         //   body = const Text("Refresh failed");
         // }
-        else if (mode == RefreshStatus.completed) {
+        else if (mode == RefreshStatus.failed) {
+          body = const Icon(
+            Icons.highlight_off_rounded,
+            color: CarroColors.primayColor,
+            size: Dimensions.dp_30,
+          );
+        } else if (mode == RefreshStatus.completed) {
           body = const Icon(
             Icons.check_circle_outline_rounded,
             color: CarroColors.primayColor,

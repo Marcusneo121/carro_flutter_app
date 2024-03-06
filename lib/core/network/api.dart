@@ -110,4 +110,36 @@ class DioFactory {
 
     return response;
   }
+
+  Future<Response<dynamic>> patch(
+      {required String url,
+      Map<String, dynamic>? queryParameters,
+      Object? data,
+      bool useOwnBaseURL = false}) async {
+    late Options optionData;
+    if (shapref.getStringUserSessionData == null) {
+      optionData = Options(headers: {
+        CONTENT_TYPE: APPLICATION_JSON,
+        ACCEPT: APPLICATION_JSON,
+        DEFAULT_LANGUAGE: DEFAULT_LANGUAGE,
+      });
+    } else {
+      optionData = Options(headers: {
+        CONTENT_TYPE: APPLICATION_JSON,
+        ACCEPT: APPLICATION_JSON,
+        AUTHORIZATION:
+            'Bearer ${shapref.userSessionData.token?.token.toString() ?? ""}',
+        DEFAULT_LANGUAGE: DEFAULT_LANGUAGE,
+      });
+    }
+
+    Response<dynamic> response = await dio.patch(
+      useOwnBaseURL == false ? BASE_URL + url : url,
+      queryParameters: queryParameters,
+      data: data,
+      options: optionData,
+    );
+
+    return response;
+  }
 }
