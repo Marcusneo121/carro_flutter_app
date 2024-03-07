@@ -1,3 +1,29 @@
+class Cars {
+  List<Car>? data;
+  String? message;
+
+  Cars({this.data, this.message});
+
+  Cars.fromJson(Map<String, dynamic> json) {
+    if (json['data'] != null) {
+      data = <Car>[];
+      json['data'].forEach((v) {
+        data!.add(Car.fromJson(v));
+      });
+    }
+    message = json['message'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    data['message'] = message;
+    return data;
+  }
+}
+
 class Car {
   int? id;
   int? userId;
@@ -16,9 +42,9 @@ class Car {
   String? price;
   String? availableToDate;
   String? availableFromDate;
-  bool? isElectric;
   String? createdAt;
   String? updatedAt;
+  bool? isElectric;
 
   Car(
       {this.id,
@@ -38,9 +64,9 @@ class Car {
       this.price,
       this.availableToDate,
       this.availableFromDate,
-      this.isElectric,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,
+      this.isElectric});
 
   Car.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -60,9 +86,9 @@ class Car {
     price = json['price'];
     availableToDate = json['available_to_date'];
     availableFromDate = json['available_from_date'];
-    isElectric = json['is_electric'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    isElectric = json['is_electric'];
   }
 
   Map<String, dynamic> toJson() {
@@ -84,9 +110,9 @@ class Car {
     data['price'] = price;
     data['available_to_date'] = availableToDate;
     data['available_from_date'] = availableFromDate;
-    data['is_electric'] = isElectric;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
+    data['is_electric'] = isElectric;
     return data;
   }
 }

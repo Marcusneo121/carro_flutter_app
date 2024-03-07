@@ -3,10 +3,14 @@ import 'package:carro_flutter_app/modules/home/entity/car.dart';
 import 'package:carro_flutter_app/modules/home/service/home_service.dart';
 import 'package:carro_flutter_app/modules/settings/entity/post.dart';
 import 'package:flutter/material.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HomeProvider extends ViewStateModel {
   List<Post> post = [];
-  List<Car> cars = [];
+  Cars? _cars;
+  List<Car> get getCarList => _cars?.data ?? [];
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
 
   HomeProvider() {
     //call api here initializ
@@ -28,11 +32,13 @@ class HomeProvider extends ViewStateModel {
       }
 
       if (response[1] != null) {
-        cars = response[1];
+        _cars = response[1];
       }
 
+      refreshController.refreshCompleted();
       setIdle();
     } catch (e, s) {
+      refreshController.refreshFailed();
       setError(e, s);
     }
   }

@@ -5,6 +5,7 @@ import 'package:carro_flutter_app/core/theme/dimens.dart';
 import 'package:carro_flutter_app/core/theme/styles.dart';
 import 'package:carro_flutter_app/core/widget/booking_host_list_item.dart';
 import 'package:carro_flutter_app/core/widget/custom_pull_down_refresh_header.dart';
+import 'package:carro_flutter_app/core/widget/shimmer_list_item.dart';
 import 'package:carro_flutter_app/main.dart';
 import 'package:carro_flutter_app/modules/authentication/register/ui/widgets/register_top_bar_widget.dart';
 import 'package:carro_flutter_app/modules/bookings/entity/booking.dart';
@@ -13,6 +14,7 @@ import 'package:carro_flutter_app/modules/bookings/view_model/bookings_model.dar
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -88,10 +90,21 @@ class _BookingsPageState extends State<BookingsPage> {
                           if (model.isBusy) {
                             return const SliverFillRemaining(
                               hasScrollBody: false,
-                              child: Center(
-                                child: CircularProgressIndicator(),
+                              child: Column(
+                                children: [
+                                  ShimmerListItem(),
+                                  ShimmerListItem(),
+                                  ShimmerListItem(),
+                                  ShimmerListItem(),
+                                ],
                               ),
                             );
+                            // return const SliverFillRemaining(
+                            //   hasScrollBody: false,
+                            //   child: Center(
+                            //     child: CircularProgressIndicator(),
+                            //   ),
+                            // );
                           } else if (model.isError) {
                             return const SliverFillRemaining(
                               hasScrollBody: false,
@@ -101,10 +114,34 @@ class _BookingsPageState extends State<BookingsPage> {
                             );
                           } else {
                             return model.getBookingList.isEmpty
-                                ? const SliverFillRemaining(
+                                ? SliverFillRemaining(
                                     hasScrollBody: false,
-                                    child: Center(
-                                      child: Text("No data"),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Lottie.asset(
+                                          'images/nothinghere.json',
+                                          width: Dimensions.dp_165,
+                                          // height: Dimensions.dp_150,
+                                          fit: BoxFit.fill,
+                                          repeat: true,
+                                        ),
+                                        const SizedBox(
+                                          height: Dimensions.dp_10,
+                                        ),
+                                        const Text(
+                                          'No booking yet...',
+                                          style: CarroTextStyles.normal_text,
+                                        ),
+                                        const SizedBox(
+                                          height: Dimensions.dp_4,
+                                        ),
+                                        const Text(
+                                          'Find a car, Book & Drive it !',
+                                          style: CarroTextStyles.normal_text,
+                                        ),
+                                      ],
                                     ),
                                   )
                                 : SliverList(

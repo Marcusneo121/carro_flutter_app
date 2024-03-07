@@ -26,18 +26,20 @@ class HomeService {
     // }
   }
 
-  static Future<List<Car>?> getCars() async {
+  static Future<Cars?> getCars() async {
     //try {
     Response<dynamic> response = await dio.get(
       url: '/car',
     );
 
-    var responseData = response.data['data'];
-    if (responseData is List) {
-      // return response.data.map((e) => Car.fromJson(e)).toList();
-      List data = responseData;
-      return data.map((e) => Car.fromJson(e)).toList();
-    }
+    return Cars.fromJson(response.data);
+
+    // var responseData = response.data['data'];
+    // if (responseData is List) {
+    //   // return response.data.map((e) => Car.fromJson(e)).toList();
+    //   List data = responseData;
+    //   return data.map((e) => Car.fromJson(e)).toList();
+    // }
     // } on DioException catch (e) {
     //   DioErrorHelper().showDialog(e);
     //   return null;

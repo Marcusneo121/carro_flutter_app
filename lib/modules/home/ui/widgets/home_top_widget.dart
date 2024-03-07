@@ -48,7 +48,7 @@ class HomeTopWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                width: Dimensions.dp_20,
+                width: Dimensions.dp_25,
               ),
               InkWell(
                 onTap: buttonThree,
@@ -57,7 +57,10 @@ class HomeTopWidget extends StatelessWidget {
                   size: Dimensions.dp_25 + Dimensions.dp_2,
                   color: CarroColors.getColor(context, CarroColors.iconColor),
                 ),
-              )
+              ),
+              const SizedBox(
+                width: Dimensions.dp_5,
+              ),
             ],
           ),
         ],

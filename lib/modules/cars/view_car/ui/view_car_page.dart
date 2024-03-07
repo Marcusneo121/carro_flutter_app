@@ -226,13 +226,28 @@ class _ViewCarPageState extends State<ViewCarPage> {
                                     progressIndicatorBuilder:
                                         (context, url, progress) {
                                       return Container(
-                                        height: 145.0,
+                                        margin: const EdgeInsets.only(
+                                          left: Dimensions.dp_25,
+                                          right: Dimensions.dp_25,
+                                          top: Dimensions.dp_15,
+                                          bottom: Dimensions.dp_15,
+                                        ),
+                                        height: Dimensions.dp_280 +
+                                            Dimensions.dp_40,
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(14),
-                                          color: Colors.grey.withOpacity(0.1),
+                                              color: Colors.grey.withOpacity(0.1),
                                         ),
                                       );
+                                      // return Container(
+                                      //   height: 145.0,
+                                      //   decoration: BoxDecoration(
+                                      //     borderRadius:
+                                      //         BorderRadius.circular(14),
+                                      //     color: Colors.grey.withOpacity(0.1),
+                                      //   ),
+                                      // );
                                     },
                                     errorWidget: (context, url, error) =>
                                         const Icon(Icons.error),
