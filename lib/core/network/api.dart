@@ -4,6 +4,7 @@ import 'package:carro_flutter_app/core/utils/shared_prefs.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class DioErrorHelper {
   showDialog(DioException e) {
@@ -64,7 +65,7 @@ class DioFactory {
       Object? data,
       bool useOwnBaseURL = false}) async {
     Response<dynamic> response = await dio.get(
-      useOwnBaseURL == false ? BASE_URL + url : url,
+      useOwnBaseURL == false ? dotenv.env['BASE_URL'].toString() + url : url,
       queryParameters: queryParameters,
       data: data,
       options: Options(headers: {
@@ -102,7 +103,7 @@ class DioFactory {
     }
 
     Response<dynamic> response = await dio.post(
-      useOwnBaseURL == false ? BASE_URL + url : url,
+      useOwnBaseURL == false ? dotenv.env['BASE_URL'].toString() + url : url,
       queryParameters: queryParameters,
       data: data,
       options: optionData,
@@ -134,7 +135,7 @@ class DioFactory {
     }
 
     Response<dynamic> response = await dio.patch(
-      useOwnBaseURL == false ? BASE_URL + url : url,
+      useOwnBaseURL == false ? dotenv.env['BASE_URL'].toString() + url : url,
       queryParameters: queryParameters,
       data: data,
       options: optionData,
