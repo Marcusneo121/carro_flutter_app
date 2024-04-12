@@ -632,7 +632,7 @@ class _ViewBookingPageState extends State<ViewBookingPage> {
                   style: CarroTextStyles.large_title_bold,
                 ),
                 Text(
-                  "RM ${int.parse(widget.args.bookingData.lastBargainAmount ?? "0") * (widget.args.bookingData.daysOfRental ?? 0)} x ${(widget.args.bookingData.daysOfRental ?? 0)} day(s)",
+                  "RM ${int.parse(widget.args.bookingData.lastBargainAmount ?? "0")} x ${(widget.args.bookingData.daysOfRental ?? 0)} day(s)",
                   style: CarroTextStyles.large_item_text.copyWith(
                     fontStyle: FontStyle.italic,
                     color: CarroColors.getColor(
