@@ -32,7 +32,7 @@ Additional Features
 
 | Booking Detail                                                   | Stripe Payment Sheet                                           |
 | ---------------------------------------------------------------- | -------------------------------------------------------------- |
-| <img src="https://postimg.cc/ThTv0MCy" width="250"/> | <img src="https://postimg.cc/zVzqp0sN" width="250"/>  |
+| <img src="https://i.postimg.cc/tRxRX96z/IMG-1279.png" width="250"/> | <img src="https://i.postimg.cc/NfTLsnbK/IMG-1281.png" width="250"/>  |
 
 ## State Management & Architecture
 
