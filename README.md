@@ -32,11 +32,11 @@ Additional Features
 
 Home | My Booking
 --- | ---
-![Home](https://ibb.co/rdt48Rh) | ![My Booking](https://ibb.co/g7XQCT9)
+![Home](https://i.ibb.co/NnqxzF7/IMG-1277.png) | ![My Booking](https://i.ibb.co/gr9pkV7/IMG-1278.png)
 
 Booking Pre Payment Page | My Booking
 --- | ---
-![My Booking Detail Page](https://ibb.co/yFjDDSR) | ![Stripe Payment Sheet](https://ibb.co/hK2fd19) 
+![My Booking Detail Page](https://i.ibb.co/6Zy7hX4/IMG-1279.png) | ![Stripe Payment Sheet](https://i.ibb.co/cTVjrk4/IMG-1281.png) 
 
 
 ## State Management & Architecture
