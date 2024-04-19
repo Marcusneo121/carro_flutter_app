@@ -28,7 +28,7 @@ Additional Features
 
 | Home                                           | My Booking                                           |
 | ---------------------------------------------- | ---------------------------------------------------- |
-| ![Home](https://i.ibb.co/NnqxzF7/IMG-1277.png) | ![My Booking](https://i.ibb.co/gr9pkV7/IMG-1278.png) |
+| <img src="https://i.ibb.co/NnqxzF7/IMG-1277.png" width="128"/> | <img src="https://i.ibb.co/gr9pkV7/IMG-1278.png" width="128"/>  |
 
 | Booking Detail                                                   | Stripe Payment Sheet                                           |
 | ---------------------------------------------------------------- | -------------------------------------------------------------- |
