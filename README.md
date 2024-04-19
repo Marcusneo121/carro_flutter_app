@@ -1,6 +1,4 @@
-
 ![Logo](https://i.ibb.co/wN4LCJb/carros.png)
-
 
 # Carro Flutter App
 
@@ -10,13 +8,11 @@ The reason I am re-develop the same app is because I am trying to create my own 
 
 Therefore, this project is mainly a showcase of how the APIs work. The main focus is the Backend.
 
-
-
 ## Features
 
 Some pretty basic feature, mainly focus on backend. This is just a showcase.
 
-- Login, Sign Up & Logout with JWT Authentication 
+- Login, Sign Up & Logout with JWT Authentication
 - Host Car
 - Guest Book Car
 - Payment with Stripe (custom backend api integrated with Stripe)
@@ -24,25 +20,26 @@ Some pretty basic feature, mainly focus on backend. This is just a showcase.
 - Bargain car renting price (between Host & Guest)
 
 Additional Features
+
 - Light/dark mode
 - Dynamic App Icon based on theme.
 
-
 ## Screenshots
 
-Home | My Booking
---- | ---
-![Home](https://i.ibb.co/NnqxzF7/IMG-1277.png) | ![My Booking](https://i.ibb.co/gr9pkV7/IMG-1278.png)
+| Home                                           | My Booking                                           |
+| ---------------------------------------------- | ---------------------------------------------------- |
+| ![Home](https://i.ibb.co/NnqxzF7/IMG-1277.png) | ![My Booking](https://i.ibb.co/gr9pkV7/IMG-1278.png) |
 
-Booking Pre Payment Page | My Booking
---- | ---
-![My Booking Detail Page](https://i.ibb.co/6Zy7hX4/IMG-1279.png) | ![Stripe Payment Sheet](https://i.ibb.co/cTVjrk4/IMG-1281.png) 
-
+| Booking Detail                                                   | Stripe Payment Sheet                                           |
+| ---------------------------------------------------------------- | -------------------------------------------------------------- |
+| ![My Booking Detail Page](https://i.ibb.co/F4T99VW/IMG-1279.png) | ![Stripe Payment Sheet](https://i.ibb.co/WcBtzp5/IMG-1281.png) |
 
 ## State Management & Architecture
+
 **Provider + ChangeNotifier (with Custom ViewState)**
 
 - ViewStateModel with ChangeNotifier
+
 ```
 //Example of a state
 //Detail code in "lib/core/provider/view_state_model.dart"
@@ -61,8 +58,8 @@ class ViewStateModel with ChangeNotifier {
 }
 ```
 
-
 - Use, Implementation & Extending
+
 ```
 class DemoProvider extends ViewStateModel {
   DemoProvider() {
@@ -83,6 +80,7 @@ class DemoProvider extends ViewStateModel {
 ```
 
 - UI Layer Implementation
+
 ```
 class DemoPage extends StatefulWidget {
     Widget build(BuildContext context) {
@@ -110,7 +108,8 @@ class DemoPage extends StatefulWidget {
 The reason I use Provider is that I want to keep the project simple to manage, and I don't like how BLOC need to manage 3 files (bloc, event, state). However with BLOC it did the same thing as my ViewState approach. One thing I like with BLOC that it is complicated to setup at first but the implementation in UI layer and features are much more easier, based on my past project experience.
 
 ## Build & Run
-To build & run this Flutter project : 
+
+To build & run this Flutter project :
 
 ```bash
   flutter pub get
@@ -118,12 +117,11 @@ To build & run this Flutter project :
 ```
 
 ## Related
+
 [Carro Web-App Repo - Next JS](https://github.com/Marcusneo121/carro-web-app)
 
 [Carro Backend Repo - Node JS](https://github.com/Marcusneo121/carro-backend)
 
-
 ## Contributor
 
 - [@Marcusneo121](https://github.com/Marcusneo121)
-
