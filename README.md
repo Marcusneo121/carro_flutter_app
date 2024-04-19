@@ -28,11 +28,11 @@ Additional Features
 
 | Home                                           | My Booking                                           |
 | ---------------------------------------------- | ---------------------------------------------------- |
-| <img src="https://i.ibb.co/NnqxzF7/IMG-1277.png" width="128"/> | <img src="https://i.ibb.co/gr9pkV7/IMG-1278.png" width="128"/>  |
+| <img src="https://i.ibb.co/NnqxzF7/IMG-1277.png" width="250"/> | <img src="https://i.ibb.co/gr9pkV7/IMG-1278.png" width="250"/>  |
 
 | Booking Detail                                                   | Stripe Payment Sheet                                           |
 | ---------------------------------------------------------------- | -------------------------------------------------------------- |
-| ![My Booking Detail Page](https://i.ibb.co/F4T99VW/IMG-1279.png) | ![Stripe Payment Sheet](https://i.ibb.co/WcBtzp5/IMG-1281.png) |
+| <img src="https://i.ibb.co/F4T99VW/IMG-1279.png" width="250"/> | <img src="https://i.ibb.co/WcBtzp5/IMG-1281.png" width="250"/>  |
 
 ## State Management & Architecture
 
