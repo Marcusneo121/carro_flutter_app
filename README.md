@@ -129,9 +129,9 @@ To build & run this Flutter project :
 
 ## Technologies
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/2560px-Nextjs-logo.svg.png" width="150"/> 
+<img src="https://i.pinimg.com/736x/4a/2b/e7/4a2be73b1e2efb44355436c40bf496dd.jpg" width="150"/> 
 <img src="https://w7.pngwing.com/pngs/616/528/png-transparent-angularjs-typescript-javascript-vue-js-others-blue-angle-text-thumbnail.png" width="150"/> 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Tailwind_CSS_logo.svg/2560px-Tailwind_CSS_logo.svg.png" width="150"/> 
+<img src="https://branditechture.agency/brand-logos/wp-content/uploads/wpdm-cache/Tailwind-CSS-900x0.png" width="150"/> 
 <img src="https://lucide.dev/library-logos/shadcn-ui-light.svg" width="150"/> 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/2560px-Stripe_Logo%2C_revised_2016.svg.png" width="150"/> 
 
