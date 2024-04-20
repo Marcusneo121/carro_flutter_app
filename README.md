@@ -8,6 +8,10 @@ The reason I am re-develop the same app is because I am trying to create my own 
 
 Therefore, this project is mainly a showcase of how the APIs work. The main focus is the Backend.
 
+## Technologies
+
+<img src="https://storage.googleapis.com/cms-storage-bucket/847ae81f5430402216fd.svg" width="150"/><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/2560px-Stripe_Logo%2C_revised_2016.svg.png" width="150"/> 
+
 ## Features
 
 Some pretty basic feature, mainly focus on backend. This is just a showcase.
