@@ -125,3 +125,13 @@ To build & run this Flutter project :
 ## Contributor
 
 - [@Marcusneo121](https://github.com/Marcusneo121)
+
+
+## Technologies
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/2560px-Nextjs-logo.svg.png" width="150"/> 
+<img src="https://w7.pngwing.com/pngs/616/528/png-transparent-angularjs-typescript-javascript-vue-js-others-blue-angle-text-thumbnail.png" width="150"/> 
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Tailwind_CSS_logo.svg/2560px-Tailwind_CSS_logo.svg.png" width="150"/> 
+<img src="https://lucide.dev/library-logos/shadcn-ui-light.svg" width="150"/> 
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/2560px-Stripe_Logo%2C_revised_2016.svg.png" width="150"/> 
+
