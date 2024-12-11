@@ -29,120 +29,122 @@ class _LoginPageState extends State<LoginPage> {
         child: Center(
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: Dimensions.dp_40),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 300,
-                  height: 90,
-                  child: Theme.of(context).colorScheme.brightness ==
-                          Brightness.light
-                      ? Image.asset('images/carros_white.png')
-                      : Image.asset('images/carros.png'),
-                ),
-                const SizedBox(
-                  height: Dimensions.dp_28,
-                ),
-                TextFormField(
-                  style: CarroTextStyles.normal_text_bold,
-                  controller: usernameController,
-                  keyboardType: TextInputType.text,
-                  textAlign: TextAlign.left,
-                  decoration: InputDecoration(
-                    hintText: 'Username',
-                    hintStyle: CarroTextStyles.normal_text_bold.copyWith(
-                      color: CarroColors.getColor(
-                          context, CarroColors.textInputColor),
-                    ),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 300,
+                    height: 90,
+                    child: Theme.of(context).colorScheme.brightness ==
+                            Brightness.light
+                        ? Image.asset('images/carros_white.png')
+                        : Image.asset('images/carros.png'),
                   ),
-                  onChanged: (value) {
-                    //Do something with the user input.
-                    //email = value;
-                  },
-                ),
-                const SizedBox(
-                  height: Dimensions.dp_16,
-                ),
-                TextFormField(
-                  obscureText: _hideText,
-                  style: CarroTextStyles.normal_text_bold,
-                  controller: passwordController,
-                  keyboardType: TextInputType.text,
-                  textAlign: TextAlign.left,
-                  decoration: InputDecoration(
-                      hintText: 'Password',
+                  const SizedBox(
+                    height: Dimensions.dp_28,
+                  ),
+                  TextFormField(
+                    style: CarroTextStyles.normal_text_bold,
+                    controller: usernameController,
+                    keyboardType: TextInputType.text,
+                    textAlign: TextAlign.left,
+                    decoration: InputDecoration(
+                      hintText: 'Username',
                       hintStyle: CarroTextStyles.normal_text_bold.copyWith(
                         color: CarroColors.getColor(
                             context, CarroColors.textInputColor),
                       ),
-                      suffixIcon: InkWell(
-                        onTap: () {
-                          setState(() {
-                            _hideText = !_hideText;
-                          });
-                        },
-                        child: _hideText == true
-                            ? Icon(
-                                Icons.visibility_off_rounded,
-                                color: CarroColors.getColor(
-                                  context,
-                                  CarroColors.iconColor,
-                                ),
-                              )
-                            : Icon(
-                                Icons.visibility_rounded,
-                                color: CarroColors.getColor(
-                                  context,
-                                  CarroColors.iconColor,
-                                ),
-                              ),
-                      )),
-                  onChanged: (value) {
-                    //Do something with the user input.
-                    //email = value;
-                  },
-                ),
-                const SizedBox(
-                  height: Dimensions.dp_36,
-                ),
-                RoundedButton(
-                  buttonText: 'Login',
-                  onTap: () {
-                    AuthController(context: context).login(
-                        usernameController.text, passwordController.text);
-                  },
-                ),
-                Divider(
-                  height: Dimensions.dp_100,
-                  thickness: 1,
-                  indent: Dimensions.dp_40,
-                  endIndent: Dimensions.dp_40,
-                  color:
-                      CarroColors.getColor(context, CarroColors.textInputColor),
-                ),
-                const Text(
-                  "Don't have an account?",
-                  // style: TextStyle(
-                  //   color: Colors.white,
-                  //   fontWeight: FontWeight.w600,
-                  //   fontFamily: 'Poppins',
-                  //   fontSize: 16.0,
-                  // ),
-                  style: CarroTextStyles.large_normal_text_bold,
-                ),
-                TextButton(
-                  onPressed: () {
-                    //Get.toNamed('/login/registration');
-                    //Navigator.pushNamed(context, Registration.id);
-                    locator<CarroRouter>()
-                        .navigateTo(CommonRoute.registerUsernameEmailPage);
-                  },
-                  child: const Text(
-                    'Sign Up',
-                    style: CarroTextStyles.small_label_bold,
+                    ),
+                    onChanged: (value) {
+                      //Do something with the user input.
+                      //email = value;
+                    },
                   ),
-                ),
-              ],
+                  const SizedBox(
+                    height: Dimensions.dp_16,
+                  ),
+                  TextFormField(
+                    obscureText: _hideText,
+                    style: CarroTextStyles.normal_text_bold,
+                    controller: passwordController,
+                    keyboardType: TextInputType.text,
+                    textAlign: TextAlign.left,
+                    decoration: InputDecoration(
+                        hintText: 'Password',
+                        hintStyle: CarroTextStyles.normal_text_bold.copyWith(
+                          color: CarroColors.getColor(
+                              context, CarroColors.textInputColor),
+                        ),
+                        suffixIcon: InkWell(
+                          onTap: () {
+                            setState(() {
+                              _hideText = !_hideText;
+                            });
+                          },
+                          child: _hideText == true
+                              ? Icon(
+                                  Icons.visibility_off_rounded,
+                                  color: CarroColors.getColor(
+                                    context,
+                                    CarroColors.iconColor,
+                                  ),
+                                )
+                              : Icon(
+                                  Icons.visibility_rounded,
+                                  color: CarroColors.getColor(
+                                    context,
+                                    CarroColors.iconColor,
+                                  ),
+                                ),
+                        )),
+                    onChanged: (value) {
+                      //Do something with the user input.
+                      //email = value;
+                    },
+                  ),
+                  const SizedBox(
+                    height: Dimensions.dp_36,
+                  ),
+                  RoundedButton(
+                    buttonText: 'Login',
+                    onTap: () {
+                      AuthController(context: context).login(
+                          usernameController.text, passwordController.text);
+                    },
+                  ),
+                  Divider(
+                    height: Dimensions.dp_100,
+                    thickness: 1,
+                    indent: Dimensions.dp_40,
+                    endIndent: Dimensions.dp_40,
+                    color: CarroColors.getColor(
+                        context, CarroColors.textInputColor),
+                  ),
+                  const Text(
+                    "Don't have an account?",
+                    // style: TextStyle(
+                    //   color: Colors.white,
+                    //   fontWeight: FontWeight.w600,
+                    //   fontFamily: 'Poppins',
+                    //   fontSize: 16.0,
+                    // ),
+                    style: CarroTextStyles.large_normal_text_bold,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      //Get.toNamed('/login/registration');
+                      //Navigator.pushNamed(context, Registration.id);
+                      locator<CarroRouter>()
+                          .navigateTo(CommonRoute.registerUsernameEmailPage);
+                    },
+                    child: const Text(
+                      'Sign Up',
+                      style: CarroTextStyles.small_label_bold,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
