@@ -147,7 +147,7 @@ class BookingsModel extends ViewStateModel {
         await Stripe.instance.initPaymentSheet(
           paymentSheetParameters: SetupPaymentSheetParameters(
             customFlow: false,
-            merchantDisplayName: 'CARRO',
+            merchantDisplayName: 'P2PCar',
             paymentIntentClientSecret: paymentIntent,
             customerEphemeralKeySecret: ephemeralKey,
             customerId: customer,
